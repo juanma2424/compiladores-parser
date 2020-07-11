@@ -1,6 +1,0 @@
-{
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "libs/projectLib/java-cup-11b-runtime.jar"
-    ]
-}
