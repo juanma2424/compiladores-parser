@@ -4,3 +4,7 @@ SET CLASSPATH=%JAVA_HOME%;
 cd C:\Users\David\Documents\NetBeansProjects\JflexyCupEjemplo\src\Analizadores
 java -jar C:\Users\David\Desktop\Fuentes\java-cup-11b.jar -parser analisis_sintactico -symbols Simbolos A_Sintactico.cup
 pause
+
+
+
+java -jar C:\Users\alfon\Documents\compiladores-parser\libs\compilerLib\java-cup-11b.jar -parser analisis_sintactico -symbols Symb A_Sintactico.cup
