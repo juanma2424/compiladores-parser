@@ -50,20 +50,149 @@ action code
 
 /*--------------- 2da Area: Declaraciones -----------------------*/
 //------> declaracion de terminales 
-terminal mas;
-terminal String numero;
+terminal pragma, solidity, techo, contract, O_Parent_L, C_Parent_L, epsilon,enumSoli, punto_coma, coma, bool, byteSoli, bytes, uint, uint_O, uint_DS, uint_TD, uint_SC, uint_CVO, uint_DCS, intSoli, int_O, int_DS, int_TD, int_SC, int_CVO, int_DCS, address, address_payable, O_Parent_C, C_Parent_C, publicSoli, privateSoli, igual, trueSoli, falseSoli, igual_igual , mayor_igual , mayor , menor_igual , menor , diferente , op_or , op_and , negacion, mas , menos , div , por , O_Parent_R , C_Parent_R , porcentaje , mas_igual , menos_igual , por_igual , div_igual, punto, thisSoli, whileSoli, returnSoli, breakSoli, continueSoli, forSoli, doSoli, ifSoli, elseSoli, interrogacion, punto_punto, structSoli, functionSoli, payableSoli, internalSoli, returns;
+terminal String ident, numero,numero_HEX,string;
 
 //------> declaracion de no terminales
-non terminal String INICIO,E;
+non terminal String INICIO, NUMERO_P, BODY_CONTRACT, BODY_CONTRACT_P, BODY_CONTRACT_PP, BODY_CONTRACT_PPP, BODY_CONTRACT_PPPP, EN, VAR, STRU, FUNC, EN_IDENT, TIPO, VAR_ARR, VAR_ACCESS, VAR_CONTRACT, VAR_CONTRACT_S, VAR_CONTRACT_C, ASSIGN, VAL_LIT, EXP, OP_ARIT, EXP_ARIT, OP,OP_BOOL,EXP_BOOL,OP_OP_BOOL, OP_ARIT_P, OP_BOOL_P,FUNC_CALL,FUNC_CALL_P,FUNC_CALL_PARAMS,FUNC_CALL_PARAMS_P, IDENT_BODY, IDENT_BODY_P, IDENT_BODY_PP,BODY_LIT_TF, VAR_CONTRACT_P, STRU_WHILE, BODY_SENT, BODY_WHILE, BODY_ASSIGN, BODY_SENT_P, BODY_FUN_CALL, BODY_SENT_M, STRU_FOR, FOR_VAR, STRU_DO_WHILE, STRU_IF, STRU_ELSE, STRU_IF_LINE, IF_LINE_VAR, IF_LINE_VAR_P, STRUCTURE, STRUCTURE_VAR, STRU_IF_ELSE_IN, STRU_ELSE_IN, CUERPO, CUERPO_ASSIGN, FUNC_PARAM, FUNC_MOD, FUNC_RETURNS, CUERPO_M, CUERPO_ASSIGN_P, ASSIGN_NOT_VAR;
 
-precedence left mas;
 
 start with INICIO;
 
-/*--------------- 3ra Area: Reglas Semanticas -----------------------*/
-INICIO::=E:a mas E:b {: String r = a + "+" + b;
-                        resultado= r;
-                    :};
+/*--------------------- Reglas Semanticas ---------------------------*/
+// INICIO ::= pragma solidity techo numero NUMERO_P;
+// NUMERO_P ::= numero NUMERO_P | epsilon;
 
-E::= numero:a {: RESULT = a; :};
-E::= mas {: RESULT = "+"; :};
+INICIO ::= contract ident O_Parent_L BODY_CONTRACT C_Parent_L INICIO | epsilon;
+
+BODY_CONTRACT ::= EN BODY_CONTRACT | BODY_CONTRACT_P;
+BODY_CONTRACT_P ::= VAR_CONTRACT BODY_CONTRACT_P | BODY_CONTRACT_PP;
+BODY_CONTRACT_PP ::= STRUCTURE BODY_CONTRACT_PP | BODY_CONTRACT_PPP;
+BODY_CONTRACT_PPP ::= FUNC BODY_CONTRACT_PPP | BODY_CONTRACT_PPPP;
+
+/*------------------------- FUNCIONES -------------------------------*/
+FUNC ::= functionSoli ident O_Parent_R TIPO ident FUNC_PARAM C_Parent_R FUNC_MOD FUNC_RETURNS O_Parent_L CUERPO_ASSIGN CUERPO_M returnSoli EXP punto_coma C_Parent_L;
+FUNC_PARAM ::= coma TIPO ident FUNC_PARAM | epsilon;
+FUNC_MOD ::= payableSoli | privateSoli | publicSoli | internalSoli | epsilon;
+FUNC_RETURNS ::= returns O_Parent_R TIPO ident C_Parent_R;
+
+/*--------------------------- CUERPO --------------------------------*/
+CUERPO_M ::= CUERPO CUERPO_M | epsilon;
+CUERPO ::= ASSIGN_NOT_VAR |EXP | STRU;
+
+/*-------------------- CUERPO ASIGNACIONES --------------------------*/
+CUERPO_ASSIGN ::= VAR_CONTRACT punto_coma CUERPO_ASSIGN | epsilon;
+
+/*------------------------ Estructuras ------------------------------*/
+STRUCTURE ::= structSoli ident O_Parent_L TIPO VAR_ARR VAR_ACCESS ident punto_coma STRUCTURE_VAR C_Parent_L;
+STRUCTURE_VAR ::= TIPO VAR_ARR VAR_ACCESS ident punto_coma STRUCTURE_VAR | epsilon;
+
+//---------------------------------------------------------------------------------------------------------------------------//
+/*------------------- Estructuras de control ------------------------*/
+STRU ::= STRU_WHILE | STRU_FOR | STRU_DO_WHILE | STRU_IF | STRU_IF_LINE;
+
+/*--------------------------- While ---------------------------------*/
+STRU_WHILE ::= whileSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT punto_coma BODY_SENT_M BODY_WHILE C_Parent_L;
+
+/*---------------------------- For ----------------------------------*/
+STRU_FOR ::= forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma EXP C_Parent_R O_Parent_L BODY_SENT punto_coma BODY_SENT_M C_Parent_L;
+
+/*------------------------- do-while --------------------------------*/
+STRU_DO_WHILE ::= doSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L whileSoli O_Parent_R OP_BOOL C_Parent_R punto_coma;
+
+/*---------------------------- if -----------------------------------*/
+STRU_IF ::= ifSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | STRU_ELSE;
+
+/*--------------------------- else ----------------------------------*/
+STRU_ELSE ::= elseSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | epsilon;
+
+/*-------------------------- If line --------------------------------*/
+STRU_IF_LINE ::= IF_LINE_VAR igual O_Parent_R OP_BOOL C_Parent_R interrogacion EXP punto_punto EXP;
+
+
+/*------------------------- BODY_SENT -------------------------------*////AGREGAR AQUI
+BODY_SENT_M ::= BODY_SENT BODY_SENT_M | epsilon;
+BODY_SENT ::= ident BODY_SENT_P 
+    | whileSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT punto_coma BODY_SENT_M BODY_WHILE C_Parent_L
+    | forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma EXP C_Parent_R O_Parent_L BODY_SENT punto_coma BODY_SENT_M C_Parent_L
+    | doSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L whileSoli O_Parent_R OP_BOOL C_Parent_R punto_coma
+    | STRU_IF_ELSE_IN
+    | returnSoli punto_coma | breakSoli punto_coma | continueSoli punto_coma;
+
+BODY_SENT_P ::= BODY_ASSIGN | BODY_FUN_CALL | IF_LINE_VAR igual O_Parent_R OP_BOOL C_Parent_R interrogacion EXP punto_punto EXP;
+STRU_IF_ELSE_IN ::= ifSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | STRU_ELSE_IN;
+STRU_ELSE_IN ::= elseSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L;
+
+BODY_WHILE ::= BODY_SENT punto_coma BODY_WHILE | epsilon;
+BODY_ASSIGN ::= punto ident igual EXP | thisSoli punto ident igual EXP | igual EXP;
+BODY_FUN_CALL ::= O_Parent_R FUNC_CALL_PARAMS C_Parent_R punto_coma | punto ident O_Parent_R FUNC_CALL_PARAMS C_Parent_R punto_coma;
+FOR_VAR ::= ident igual EXP;
+IF_LINE_VAR ::= ident IF_LINE_VAR_P;
+IF_LINE_VAR_P ::= epsilon | punto ident;
+
+ASSIGN_NOT_VAR ::= ident igual EXP;
+//---------------------------------------------------------------------------------------------------------------------------//
+/*--------------------------- ENUMS ---------------------------------*///TIENE PUNTO Y COMA
+EN ::= enumSoli ident O_Parent_L ident EN_IDENT C_Parent_L punto_coma;
+EN_IDENT ::= coma ident EN_IDENT | epsilon;
+
+/*------------------------- VARIABLES -------------------------------*///INCOMPLETA
+VAR_CONTRACT ::= TIPO VAR_ARR VAR_ACCESS ident VAR_CONTRACT_P;
+
+/*--------------- 1.A VARIABLES sin asignacion ----------------------*/
+VAR_CONTRACT_P ::= punto_coma | VAR_CONTRACT_C punto_coma;
+
+/*--------------- 1.B VARIABLES con asignacion ----------------------*/
+VAR_CONTRACT_C ::= igual EXP;///////////////////////Prueba
+
+/*----------------- 1.C Estructura Variables ------------------------*/
+VAR_ARR ::= O_Parent_C C_Parent_C | epsilon;
+VAR_ACCESS ::= publicSoli | privateSoli | epsilon;
+
+
+
+/*------------------------ Expresiones ------------------------------*/
+EXP ::= BODY_LIT_TF | IDENT_BODY | OP_ARIT | OP_BOOL | FUNC_CALL;
+
+
+/*------------------- ASIGNACIONES DEL CUERPO -----------------------*/
+CUERPO_ASSIG ::= ident igual EXP;
+
+/*--------------------- LLamadas a funciones ------------------------*/
+FUNC_CALL ::= ident FUNC_CALL_P;
+FUNC_CALL_P ::= O_Parent_R FUNC_CALL_PARAMS C_Parent_R punto_coma | punto ident O_Parent_R FUNC_CALL_PARAMS C_Parent_R punto_coma;
+FUNC_CALL_PARAMS ::= ident FUNC_CALL_PARAMS_P | epsilon;
+FUNC_CALL_PARAMS_P ::= coma ident FUNC_CALL_P | epsilon;
+
+
+/*------------------- Operaciones aritmeticas -----------------------*///NO TIENE PUNTO Y COMA
+OP_ARIT ::= numero OP_ARIT_P;
+OP_ARIT_P ::= OP OP_ARIT OP_ARIT_P | epsilon;
+OP ::= mas | menos | div | por | O_Parent_R | C_Parent_R | porcentaje | mas_igual | menos_igual | por_igual | div_igual;
+
+
+/*-------------------- Operaciones booleanas ------------------------*///NO TIENE PUNTO Y COMA
+OP_BOOL ::= trueSoli OP_BOOL_P | falseSoli OP_BOOL_P;
+OP_BOOL_P ::= OP_OP_BOOL OP_BOOL OP_ARIT_P | epsilon;
+OP_OP_BOOL ::= igual_igual | mayor_igual | mayor | menor_igual | menor | diferente | op_or | op_and | negacion;
+
+
+/*------------------ IDENTIFICADORES DEL CUERPO ---------------------*///NO TIENE PUNTO Y COMA
+IDENT_BODY ::= ident IDENT_BODY_P | thisSoli IDENT_BODY_PP;
+IDENT_BODY_P ::= punto ident | punto ident O_Parent_R C_Parent_R | epsilon;
+IDENT_BODY_PP ::= punto ident | punto ident O_Parent_R C_Parent_R;
+
+
+/*---------------------- Literales de cuerpo ------------------------*///NO TIENE PUNTO Y COMA
+BODY_LIT_TF ::= numero_HEX | string;
+
+
+
+/*------------------------ TIPOS Datos ------------------------------*/
+TIPO ::= bool | byteSoli | bytes | string | uint | uint_O | uint_DS | uint_TD | uint_SC | uint_CVO | uint_DCS  | intSoli | int_O | int_DS | int_TD | int_SC | int_CVO | int_DCS | address | address_payable;
+
+
+
+
+
+
