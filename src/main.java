@@ -7,7 +7,7 @@ import java.io.StringReader;
 public class main {
     public static void main(String[] args) {
         try {
-            File file = new File("C:\\Users\\alfon\\Documents\\compiladores-parser\\src\\Analizadores\\prueba.txt"); 
+            File file = new File("C:\\Users\\alfon\\Documents\\compiladores-parser\\src\\Analizadores\\ejecutableSolidity.txt"); 
             Lexer lexico = new Lexer (new BufferedReader(new FileReader(file)));
             analisis_sintactico sintactico = new analisis_sintactico(lexico);
             System.out.println("---- Inicio ----");
