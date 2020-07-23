@@ -86,7 +86,7 @@ CUERPO_M ::= CUERPO CUERPO_M | ;
 CUERPO ::= ASSIGN_NOT_VAR | EXP punto_coma | STRU;
 
 /*-------------------- CUERPO ASIGNACIONES --------------------------*/
-CUERPO_ASSIGN ::= VAR_CONTRACT punto_coma CUERPO_ASSIGN | ;
+CUERPO_ASSIGN ::= VAR_CONTRACT CUERPO_ASSIGN | ;
 
 /*------------------------ Estructuras ------------------------------*/
 STRUCTURE ::= structSoli ident O_Parent_L TIPO VAR_ARR VAR_ACCESS ident punto_coma STRUCTURE_VAR C_Parent_L;

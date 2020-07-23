@@ -2,6 +2,11 @@ contract checho {
     int carro = 10 ;
     function chechin ( int chechon ) {
         int chechen = 11 ;
+
+        while ( checho == juanma ) {
+
+        }
+
         return 20 ;
     }
 }
