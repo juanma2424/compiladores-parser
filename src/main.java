@@ -10,8 +10,9 @@ public class main {
             File file = new File("C:\\Users\\alfon\\Documents\\compiladores-parser\\src\\Analizadores\\prueba.txt"); 
             Lexer lexico = new Lexer (new BufferedReader(new FileReader(file)));
             analisis_sintactico sintactico = new analisis_sintactico(lexico);
+            System.out.println("---- Inicio ----");
             sintactico.parse();
-            System.out.println("contract checho {}");
+            System.out.println("---- Final ----");
             // System.out.println(sintactico.resultado);
         } catch (Exception e) {
             System.out.println(e);

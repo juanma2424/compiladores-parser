@@ -167,7 +167,7 @@ CUERPO_ASSIG ::= ident igual EXP;
 FUNC_CALL ::= ident FUNC_CALL_P;
 FUNC_CALL_P ::= O_Parent_R FUNC_CALL_PARAMS C_Parent_R | punto ident O_Parent_R FUNC_CALL_PARAMS C_Parent_R;
 FUNC_CALL_PARAMS ::= ident FUNC_CALL_PARAMS_P | ;
-FUNC_CALL_PARAMS_P ::= coma ident FUNC_CALL_P | ;
+FUNC_CALL_PARAMS_P ::= coma ident FUNC_CALL_PARAMS_P | ;
 
 
 /*------------------- Operaciones aritmeticas -----------------------*///NO TIENE PUNTO Y COMA

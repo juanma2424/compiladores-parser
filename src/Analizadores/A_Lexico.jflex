@@ -33,7 +33,6 @@ import java_cup.runtime.*;
     }
      private Symbol symbol(int type, Object value) {
        System.out.println(value);
-       System.out.println(type);
       return new Symbol(type, yyline, yycolumn, value);
     }
 
@@ -401,7 +400,7 @@ yybegin(YYINITIAL);}
   [^]   {
     tokens.add(new Token(string.toString(), yyline, yycolumn, "Identificador"));
     yybegin(YYINITIAL);
-    return symbol(Symb.ident, yytext());  //OJO AQUI
+    return symbol(Symb.ident, string.toString());  //OJO AQUI
   }            
 
 }
