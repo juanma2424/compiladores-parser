@@ -3,8 +3,8 @@ contract checho {
     function chechin ( int chechon ) {
         int chechen = 11 ;
 
-        while ( checho == juanma ) {
-
+        while ( true == false ) {
+            chenchen = chechan ; 
         }
 
         return 20 ;

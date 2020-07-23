@@ -178,7 +178,7 @@ OP ::= mas | menos | div | por | O_Parent_R | C_Parent_R | porcentaje | mas_igua
 
 /*-------------------- Operaciones booleanas ------------------------*///NO TIENE PUNTO Y COMA
 OP_BOOL ::= trueSoli OP_BOOL_P | falseSoli OP_BOOL_P;
-OP_BOOL_P ::= OP_OP_BOOL OP_BOOL OP_ARIT_P | ;
+OP_BOOL_P ::= OP_OP_BOOL OP_BOOL | ;
 OP_OP_BOOL ::= igual_igual | mayor_igual | mayor | menor_igual | menor | diferente | op_or | op_and | negacion;
 
 
