@@ -54,10 +54,10 @@ terminal pragma, solidity, techo, contract, O_Parent_L, C_Parent_L, epsilon,enum
 terminal String ident, numero,numero_HEX,string;
 
 //------> declaracion de no terminales
-non terminal String INICIO, NUMERO_P, BODY_CONTRACT, BODY_CONTRACT_P, BODY_CONTRACT_PP, BODY_CONTRACT_PPP, BODY_CONTRACT_PPPP, EN, VAR, STRU, FUNC, EN_IDENT, TIPO, VAR_ARR, VAR_ACCESS, VAR_CONTRACT, VAR_CONTRACT_S, VAR_CONTRACT_C, ASSIGN, VAL_LIT, EXP, OP_ARIT, EXP_ARIT, OP,OP_BOOL,EXP_BOOL,OP_OP_BOOL, OP_ARIT_P, OP_BOOL_P,FUNC_CALL,FUNC_CALL_P,FUNC_CALL_PARAMS,FUNC_CALL_PARAMS_P, IDENT_BODY, IDENT_BODY_P, IDENT_BODY_PP,BODY_LIT_TF, VAR_CONTRACT_P, STRU_WHILE, BODY_SENT, BODY_WHILE, BODY_ASSIGN, BODY_SENT_P, BODY_FUN_CALL, BODY_SENT_M, STRU_FOR, FOR_VAR, STRU_DO_WHILE, STRU_IF, STRU_ELSE, STRU_IF_LINE, IF_LINE_VAR, IF_LINE_VAR_P, STRUCTURE, STRUCTURE_VAR, STRU_IF_ELSE_IN, STRU_ELSE_IN, CUERPO, CUERPO_ASSIGN, FUNC_PARAM, FUNC_MOD, FUNC_RETURNS, CUERPO_M, CUERPO_ASSIGN_P, ASSIGN_NOT_VAR, BODY_SENT_PP;
+non terminal String INICIO, NUMERO_P, BODY_CONTRACT, BODY_CONTRACT_P, BODY_CONTRACT_PP, BODY_CONTRACT_PPP, BODY_CONTRACT_PPPP, EN, VAR, STRU, FUNC, EN_IDENT, TIPO, VAR_ARR, VAR_ACCESS, VAR_CONTRACT, VAR_CONTRACT_S, VAR_CONTRACT_C, ASSIGN, VAL_LIT, EXP, OP_ARIT, EXP_ARIT, OP,OP_BOOL,EXP_BOOL,OP_OP_BOOL, OP_ARIT_P, OP_BOOL_P,FUNC_CALL,FUNC_CALL_P,FUNC_CALL_PARAMS,FUNC_CALL_PARAMS_P, IDENT_BODY, IDENT_BODY_P, IDENT_BODY_PP,BODY_LIT_TF, VAR_CONTRACT_P, STRU_WHILE, BODY_SENT, BODY_WHILE, BODY_ASSIGN, BODY_SENT_P, BODY_FUN_CALL, BODY_SENT_M, STRU_FOR, FOR_VAR, STRU_DO_WHILE, STRU_IF, STRU_ELSE, STRU_IF_LINE, IF_LINE_VAR, IF_LINE_VAR_P, STRUCTURE, STRUCTURE_VAR, STRU_IF_ELSE_IN, STRU_ELSE_IN, CUERPO, CUERPO_ASSIGN, FUNC_PARAM, FUNC_MOD, FUNC_RETURNS, CUERPO_M, CUERPO_ASSIGN_P, ASSIGN_NOT_VAR, BODY_SENT_PP, CUERPO_P;
 
 precedence left porcentaje, mas_igual, por_igual, div_igual, O_Parent_R, menos_igual;
-precedence nonassoc igual, C_Parent_R;
+precedence nonassoc C_Parent_R;
 precedence left  mas, menos;
 precedence left  por, div;
 precedence left O_Parent_R;
@@ -83,7 +83,8 @@ FUNC_RETURNS ::= returns O_Parent_R TIPO ident C_Parent_R | ;
 
 /*--------------------------- CUERPO --------------------------------*/
 CUERPO_M ::= CUERPO CUERPO_M | ;
-CUERPO ::= ASSIGN_NOT_VAR | EXP punto_coma | STRU;
+CUERPO ::= ident igual CUERPO_P | ident punto ident igual CUERPO_P | EXP punto_coma | STRU;
+CUERPO_P ::= ASSIGN_NOT_VAR | STRU_IF_LINE;
 
 /*-------------------- CUERPO ASIGNACIONES --------------------------*/
 CUERPO_ASSIGN ::= VAR_CONTRACT CUERPO_ASSIGN | ;
@@ -94,7 +95,7 @@ STRUCTURE_VAR ::= TIPO VAR_ARR VAR_ACCESS ident punto_coma STRUCTURE_VAR | ;
 
 //---------------------------------------------------------------------------------------------------------------------------//
 /*------------------- Estructuras de control ------------------------*/
-STRU ::= STRU_WHILE | STRU_FOR | STRU_DO_WHILE | STRU_IF | STRU_IF_LINE;
+STRU ::= STRU_WHILE | STRU_FOR | STRU_DO_WHILE | STRU_IF;
 
 /*--------------------------- While ---------------------------------*/
 STRU_WHILE ::= whileSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L;
@@ -112,7 +113,7 @@ STRU_IF ::= ifSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_
 STRU_ELSE ::= elseSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | ;
 
 /*-------------------------- If line --------------------------------*/
-STRU_IF_LINE ::= ident IF_LINE_VAR igual O_Parent_R OP_BOOL C_Parent_R interrogacion_C EXP punto_punto EXP punto_coma;
+STRU_IF_LINE ::= O_Parent_R OP_BOOL C_Parent_R interrogacion_C EXP punto_punto EXP punto_coma;
 
 
 /*------------------------- BODY_SENT -------------------------------*////AGREGAR AQUI
@@ -133,9 +134,9 @@ STRU_ELSE_IN ::= elseSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | ;
 BODY_ASSIGN ::= igual EXP punto_coma;
 BODY_FUN_CALL ::= O_Parent_R FUNC_CALL_PARAMS C_Parent_R punto_coma;
 FOR_VAR ::= ident igual EXP;
-IF_LINE_VAR ::= punto ident | ;
+// IF_LINE_VAR ::= punto ident | ;
 
-ASSIGN_NOT_VAR ::= ident igual EXP punto_coma;
+ASSIGN_NOT_VAR ::= EXP punto_coma;
 //-----------------------------------------------------------------------------revisar igual sr----------------------------------------------//
 /*--------------------------- ENUMS ---------------------------------*///TIENE PUNTO Y COMA
 EN ::= enumSoli ident O_Parent_L ident EN_IDENT C_Parent_L;
