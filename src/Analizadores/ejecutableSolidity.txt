@@ -1,0 +1,85 @@
+// ejemplo 1
+contract contratoA {
+    enum clienteTipo { socio , deudor , fiador , obligatorio }
+    int saldoMinimo = 100000 ;
+    function cobrar ( int saldoMaximo ) { //Revisar varios parametros
+        int saldoTemporal = 11 ;
+        int deudor = verificarCliente ( acutal , nombre ) ;
+
+        while ( true == false ) {
+            saldoTemporal = 10 ;
+            
+            while (true == true ) {
+                return ;
+            }
+
+            do {
+                saldoTemporal = cambiarSaldoCorrespondiente ( ) ;
+            }
+            while ( false >= true ) ;
+
+            for ( saldoTemporal = 0 ; true == true ; saldoTemporal  ) { //Revisar segunda expresion
+                deudor = cambiarDeudor ( ) ;
+            }
+
+            if ( true == true ) { //Arreglar expresion booleana
+                deudor = cambiarCuenta ( ) ;
+            }
+
+            if (false == false) {
+                deudor = cuentaAnterior ( ) ;
+            }
+            else {
+                deudor = cuentaActual ( ) ;
+            }
+
+            precioCobro = ( true == true ) ? 2 + 2 : true; //parentesis para cada expresion
+
+        }
+
+        return 20 ;
+    }
+}
+
+//ejemplo 2
+contract contratoA {
+    enum clienteTipo { socio , deudor , fiador , obligatorio }
+    int saldoMinimo = 100000 ;
+    function cobrar ( int saldoMaximo ) { //Revisar varios parametros
+        int saldoTemporal = 11 ;
+        int deudor = verificarCliente ( acutal , nombre ) ;
+
+        while ( true == false ) {
+            saldoTemporal = 10 ;
+
+        }
+
+        while (true == true ) {
+            return ;
+        }
+
+        do {
+            saldoTemporal = cambiarSaldoCorrespondiente ( ) ;
+        }
+        while ( false >= true ) ;
+
+        for ( saldoTemporal = 0 ; true == true ; saldoTemporal  ) { //Revisar segunda expresion
+            deudor = cambiarDeudor ( ) ;
+        }
+
+        if ( true == true ) { //Arreglar expresion booleana
+            deudor = cambiarCuenta ( ) ;
+        }
+
+        if (false == false) {
+            deudor = cuentaAnterior ( ) ;
+        }
+        else {
+            deudor = cuentaActual ( ) ;
+        }
+
+        precioCobro = ( true == true ) ? 2 + 2 : true; //parentesis para cada expresion
+
+        return 20 ;
+    }
+}
