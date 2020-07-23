@@ -19,7 +19,7 @@ public class Symb {
   public static final int C_Parent_R = 52;
   public static final int C_Parent_L = 7;
   public static final int address_payable = 30;
-  public static final int ident = 75;
+  public static final int ident = 77;
   public static final int privateSoli = 34;
   public static final int C_Parent_C = 32;
   public static final int div = 49;
@@ -31,17 +31,16 @@ public class Symb {
   public static final int mas = 47;
   public static final int internalSoli = 73;
   public static final int uint_DCS = 21;
-  public static final int numero_HEX = 77;
+  public static final int numero_HEX = 79;
   public static final int forSoli = 64;
   public static final int continueSoli = 63;
   public static final int falseSoli = 37;
   public static final int mayor_igual = 39;
   public static final int op_and = 45;
   public static final int doSoli = 65;
-  public static final int interrogacion = 68;
   public static final int uint = 15;
   public static final int elseSoli = 67;
-  public static final int string = 78;
+  public static final int string = 80;
   public static final int uint_DS = 17;
   public static final int payableSoli = 72;
   public static final int op_or = 44;
@@ -50,6 +49,7 @@ public class Symb {
   public static final int bool = 12;
   public static final int epsilon = 8;
   public static final int div_igual = 57;
+  public static final int charss = 75;
   public static final int O_Parent_C = 31;
   public static final int returnSoli = 61;
   public static final int igual_igual = 38;
@@ -64,8 +64,9 @@ public class Symb {
   public static final int trueSoli = 36;
   public static final int structSoli = 70;
   public static final int por_igual = 56;
-  public static final int numero = 76;
+  public static final int numero = 78;
   public static final int int_TD = 25;
+  public static final int interrogacion_C = 68;
   public static final int error = 1;
   public static final int ifSoli = 66;
   public static final int enumSoli = 9;
@@ -85,6 +86,7 @@ public class Symb {
   public static final int igual = 35;
   public static final int whileSoli = 60;
   public static final int punto_coma = 10;
+  public static final int stringSoli = 76;
   public static final int contract = 5;
   public static final int address = 29;
   public static final String[] terminalNames = new String[] {
@@ -156,13 +158,15 @@ public class Symb {
   "doSoli",
   "ifSoli",
   "elseSoli",
-  "interrogacion",
+  "interrogacion_C",
   "punto_punto",
   "structSoli",
   "functionSoli",
   "payableSoli",
   "internalSoli",
   "returns",
+  "charss",
+  "stringSoli",
   "ident",
   "numero",
   "numero_HEX",

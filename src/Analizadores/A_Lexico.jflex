@@ -1,14 +1,16 @@
 /* JFlex example: partial Java language lexer specification */
+package Analizadores;
 import java.util.ArrayList;
+import java_cup.runtime.*;
 /**
     * This class is a simple example lexer.
     */
 %%
-%public      //NUEVO
-%cupsym Symb //NUEVO
-%cup         //NUEVO
-%char        //NUEVO
-%full        //NUEVO
+%public      
+%cupsym Symb 
+%cup         
+%char        
+%full        
 %class Lexer
 %unicode
 %standalone
@@ -30,6 +32,8 @@ import java.util.ArrayList;
       return new Symbol(type, yyline, yycolumn);
     }
      private Symbol symbol(int type, Object value) {
+       System.out.println(value);
+       System.out.println(type);
       return new Symbol(type, yyline, yycolumn, value);
     }
 
@@ -82,73 +86,130 @@ numeroEX = (  ( {numbersH} | {numeroD} )+ "e" ("-"|"") {numbersH} )
 /*************************************[PRINCIPALES]**********************************************/
 
 /* keywords */
-<YYINITIAL> "address"{ return symbol(Symb.address, yytext());            tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "as"     { return symbol(Symb.as, yytext());                 tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "bool"   { return symbol(Symb.bool, yytext());               tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "break"  { return symbol(Symb.break, yytext());              tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "byte"   { return symbol(Symb.byte, yytext());               tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL> "address" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.address, yytext());}
+<YYINITIAL> "as"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL> "bool"   { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.bool, yytext());}
+<YYINITIAL> "break"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.breakSoli, yytext());}
+<YYINITIAL> "byte"   { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.byteSoli, yytext());}
 
-<YYINITIAL> "bytes"((3[0-2])|([1-2][0-9])|[1-9])?  { return symbol(Symb.bytes, yytext());  tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
 
-<YYINITIAL> "constructor"{ return symbol(Symb.constructor, yytext());    tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "continue"   { return symbol(Symb.continue, yytext());       tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "contract"   { return symbol(Symb.contract, yytext());       tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "delete"     { return symbol(Symb.delete, yytext());         tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "do"         { return symbol(Symb.do, yytext());             tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "else"       { return symbol(Symb.else, yytext());           tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "enum"       { return symbol(Symb.enum, yytext());           tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "false"      { return symbol(Symb.false, yytext());          tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "for"        { return symbol(Symb.for, yytext());            tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "from"       { return symbol(Symb.from, yytext());           tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "function"   { return symbol(Symb.function, yytext());       tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "if"         { return symbol(Symb.if, yytext());             tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "import"     { return symbol(Symb.import, yytext());         tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes1"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes2"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes3"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes4"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes5"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
 
-<YYINITIAL> "int"(256|128|64|32|16|8)?  {return symbol(Symb.int, yytext());  tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes6"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes7"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes8"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes9"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes10" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
 
-<YYINITIAL> "internal" { return symbol(Symb.internal, yytext());         tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "mapping"  { return symbol(Symb.mapping, yytext());          tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "modifier" { return symbol(Symb.modifier, yytext());         tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "payable"  { return symbol(Symb.payable, yytext());          tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>  "pragma"  { return symbol(Symb.pragma, yytext());           tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>  "private" { return symbol(Symb.private, yytext());          tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes11" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes12" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes13" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes14" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes15" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
 
-<YYINITIAL> "public"   { return symbol(Symb.public yytext());            tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "return"   { return symbol(Symb.return, yytext());           tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "returns"  { return symbol(Symb.returns, yytext());          tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "string"   { return symbol(Symb.string, yytext());           tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "struct"   { return symbol(Symb.struct, yytext());           tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "this"     { return symbol(Symb.this, yytext());             tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "true"     { return symbol(Symb.true, yytext());             tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "ufixed"   { return symbol(Symb.ufixed, yytext());           tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes16" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes17" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes18" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes19" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes20" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
 
-<YYINITIAL>  "uint"(256|128|64|32|16|8)?  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes21" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes22" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes23" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes24" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes25" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
 
-<YYINITIAL> "solidity" { return symbol(Symb.solidity, yytext());         tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL> "view"     { return symbol(Symb.view, yytext());             tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>  "var"     { return symbol(Symb.var, yytext());              tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>  "while"   { return symbol(Symb.while, yytext());            tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes26" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes27" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes28" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes29" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+
+<YYINITIAL>"bytes30" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes31" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes32" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+
+<YYINITIAL> "constructor" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL> "continue"   { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.continueSoli, yytext());}
+<YYINITIAL> "contract"   { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.contract, yytext());}
+<YYINITIAL> "delete"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL> "do"         { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.doSoli, yytext());}
+<YYINITIAL> "else"       { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.elseSoli, yytext());}
+<YYINITIAL> "enum"       { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.enumSoli, yytext());}
+<YYINITIAL> "false"      { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.falseSoli, yytext());}
+<YYINITIAL> "for"        { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.forSoli, yytext());}
+<YYINITIAL> "from"       { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL> "function"   { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.functionSoli, yytext());}
+<YYINITIAL> "if"         { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.ifSoli, yytext());}
+<YYINITIAL> "import"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+
+
+//INT (256|128|64|32|16|8)?
+<YYINITIAL> "int"        { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.intSoli, yytext());}
+<YYINITIAL> "int8"       { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.int_O, yytext());}
+<YYINITIAL> "int16"      { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.int_DS, yytext());}
+<YYINITIAL> "int32"      { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.int_TD , yytext());}
+<YYINITIAL> "int64"      { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.int_SC, yytext());}
+<YYINITIAL> "int128"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.int_CVO, yytext());}
+<YYINITIAL> "int256"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.int_DCS, yytext());}
+
+
+
+<YYINITIAL> "internal"   { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.internalSoli, yytext());}
+<YYINITIAL> "mapping"    { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL> "modifier"   { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL> "payable"    { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.payableSoli, yytext());}
+<YYINITIAL>  "pragma"    { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.pragma, yytext());}
+<YYINITIAL>  "private"   { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.privateSoli, yytext());}
+
+<YYINITIAL> "public"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.publicSoli, yytext());}
+<YYINITIAL> "return"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.returnSoli, yytext());}
+<YYINITIAL> "returns"    { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.returns, yytext());}
+<YYINITIAL> "string"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.string, yytext());}
+<YYINITIAL> "struct"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.structSoli, yytext());}
+<YYINITIAL> "this"       { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.thisSoli, yytext());}
+<YYINITIAL> "true"       { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.trueSoli, yytext());}
+<YYINITIAL> "ufixed"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+
+
+// UINT "uint"(256|128|64|32|16|8)?
+<YYINITIAL>  "uint"      { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.uint, yytext());}
+<YYINITIAL>  "uint8"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.uint_O, yytext());}
+<YYINITIAL>  "uint16" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.uint_DS, yytext());}
+<YYINITIAL>  "uint32" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.uint_TD , yytext());}
+<YYINITIAL>  "uint64" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.uint_SC, yytext());}
+<YYINITIAL>  "uint128"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.uint_CVO, yytext());}
+<YYINITIAL>  "uint256"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.uint_DCS, yytext());}
+
+
+<YYINITIAL> "solidity" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.solidity, yytext());}
+<YYINITIAL> "view"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>  "var"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>  "while"   { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.whileSoli, yytext());}
 
 
 /*************************************[TRANSAC ]**********************************************/
-<YYINITIAL> "balance"      { return symbol(Symb.balance, yytext());                tokens.add(new Token(yytext(), yyline, yycolumn, "Transac")); }
-<YYINITIAL> "call"         { return symbol(Symb.call, yytext());                   tokens.add(new Token(yytext(), yyline, yycolumn, "Transac")); }
-<YYINITIAL> "callcode"     { return symbol(Symb.callcode, yytext());               tokens.add(new Token(yytext(), yyline, yycolumn, "Transac")); }
-<YYINITIAL> "delegatecall" { return symbol(Symb.delegatecall, yytext());           tokens.add(new Token(yytext(), yyline, yycolumn, "Transac")); }
-<YYINITIAL>  "send"        { return symbol(Symb.send, yytext());                   tokens.add(new Token(yytext(), yyline, yycolumn, "Transac")); }
-<YYINITIAL> "transfer"     { return symbol(Symb.transfer, yytext());               tokens.add(new Token(yytext(), yyline, yycolumn, "Transac")); }
+<YYINITIAL> "balance"      { tokens.add(new Token(yytext(), yyline, yycolumn, "Transac")); }
+<YYINITIAL> "call"         { tokens.add(new Token(yytext(), yyline, yycolumn, "Transac")); }
+<YYINITIAL> "callcode"     { tokens.add(new Token(yytext(), yyline, yycolumn, "Transac")); }
+<YYINITIAL> "delegatecall" { tokens.add(new Token(yytext(), yyline, yycolumn, "Transac")); }
+<YYINITIAL>  "send"        { tokens.add(new Token(yytext(), yyline, yycolumn, "Transac")); }
+<YYINITIAL> "transfer"     { tokens.add(new Token(yytext(), yyline, yycolumn, "Transac")); }
 
 
 /*************************************[UNITS]**********************************************/
-<YYINITIAL> "days"       { return symbol(Symb.days, yytext());              tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
-<YYINITIAL> "finney"     { return symbol(Symb.finney, yytext());            tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
-<YYINITIAL> "hours"      { return symbol(Symb.hours, yytext());             tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
-<YYINITIAL>  "minutes"   { return symbol(Symb.minutes, yytext());           tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
-<YYINITIAL> "seconds"    { return symbol(Symb.seconds, yytext());           tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
-<YYINITIAL> "szabo"      { return symbol(Symb.szabo, yytext());             tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
-<YYINITIAL> "weeks"      { return symbol(Symb.weeks, yytext());             tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
-<YYINITIAL> "wei"        { return symbol(Symb.wei, yytext());               tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
-<YYINITIAL> "years"      { return symbol(Symb.years, yytext());             tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
+<YYINITIAL> "days"       { tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
+<YYINITIAL> "finney"     { tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
+<YYINITIAL> "hours"      { tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
+<YYINITIAL>  "minutes"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
+<YYINITIAL> "seconds"    { tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
+<YYINITIAL> "szabo"      { tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
+<YYINITIAL> "weeks"      { tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
+<YYINITIAL> "wei"        { tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
+<YYINITIAL> "years"      { tokens.add(new Token(yytext(), yyline, yycolumn, "Units")); }
 
 
 
@@ -159,20 +220,27 @@ numeroEX = (  ( {numbersH} | {numeroD} )+ "e" ("-"|"") {numbersH} )
 <YYINITIAL> "hex"\' { string.setLength(0); 
                       string.append(yytext());
                       yybegin(hexaStateC);}
-<YYINITIAL> "hex" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL> "hex"  {  tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+
+
+
+<YYINITIAL> "epsilon" { return symbol(Symb.epsilon, yytext()); }
+
+
+
 
 
 <YYINITIAL> {
 
 
 /*************************************[  NUMEROS ]************************************************/
-{numbersH}+ {Identifier}+  {errores.add(new Token(yytext(), yyline, yycolumn, "Error: Numero"));}
+{numbersH}+ {Identifier}+ {errores.add(new Token(yytext(), yyline, yycolumn, "Error: Numero"));}
 {numeroD}+ {Identifier}+  {errores.add(new Token(yytext(), yyline, yycolumn, "Error: Numero"));}
 {numeroEX}+ {Identifier}+  {errores.add(new Token(yytext(), yyline, yycolumn, "Error: Numero"));}
 
-{numbersH} { return symbol(Symb.numeroN, yytext());      tokens.add(new Token(yytext(), yyline, yycolumn, "Literal: Numero"));} 
-{numeroD}  { return symbol(Symb.numeroD, yytext());      tokens.add(new Token(yytext(), yyline, yycolumn, "Literal: Numero"));} 
-{numeroEX} { return symbol(Symb.numeroEXP, yytext());    tokens.add(new Token(yytext(), yyline, yycolumn, "Literal: Numero"));}
+{numbersH} { tokens.add(new Token(yytext(), yyline, yycolumn, "Literal: Numero")); return symbol(Symb.numero, yytext()); } 
+{numeroD}  { tokens.add(new Token(yytext(), yyline, yycolumn, "Literal: Numero")); return symbol(Symb.numero, yytext()); } 
+{numeroEX} { tokens.add(new Token(yytext(), yyline, yycolumn, "Literal: Numero")); return symbol(Symb.numero, yytext()); }
 
 (( {numbersH} | {numeroD})+ ("e")+ ("-"|"")* {numeroD})   {errores.add(new Token(yytext(), yyline, yycolumn, "Error: Numero"));}
 
@@ -205,44 +273,43 @@ yybegin(filtro);
   string.setLength(0); yybegin(Chars); bandera = yycolumn;
 }
 
-"!"   { return symbol(Symb.dif, yytext());              tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"&&"  { return symbol(Symb.andD, yytext());             tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"^"   { return symbol(Symb.techo, yytext());            tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"=="  { return symbol(Symb.igualD, yytext());           tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"!="  { return symbol(Symb.difIgual, yytext());         tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"||"  { return symbol(Symb.oD, yytext());               tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"<="  { return symbol(Symb.menorI, yytext());           tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"<"   { return symbol(Symb.menor, yytext());            tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-">="  { return symbol(Symb.mayorI, yytext());           tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-">"   { return symbol(Symb.mayor, yytext());            tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"&"   { return symbol(Symb.and, yytext());              tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"|"   { return symbol(Symb.o, yytext());              tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"^"   {tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}//REPETIDO????
-"~"   {return symbol(Symb.techoT, yytext());             tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"+"   { return symbol(Symb.mas, yytext());              tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"-"   { return symbol(Symb.menos, yytext());            tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"*"   { return symbol(Symb.asterisco, yytext());        tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"/"   { return symbol(Symb.div, yytext());              tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"%"   { return symbol(Symb.porcentaje, yytext());       tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"**"  { return symbol(Symb.asteriscoD, yytext());       tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"<<"  { return symbol(Symb.menorD, yytext());           tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-">>"  { return symbol(Symb.mayorD, yytext());           tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"="   { return symbol(Symb.igual, yytext());            tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-","   { return symbol(Symb.coma, yytext());             tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-";"   { return symbol(Symb.puntoComa, yytext());        tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"."   { return symbol(Symb.punto, yytext());            tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"("   { return symbol(Symb.parentesisA, yytext());      tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-")"   { return symbol(Symb.parentesisB, yytext());      tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"["   { return symbol(Symb.parentesisCA, yytext());     tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"]"   { return symbol(Symb.parentesisCB, yytext());     tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"?"   { return symbol(Symb.preg, yytext());        tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-":"   { return symbol(Symb.dosP, yytext());             tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"{"   { return symbol(Symb.corcheteA, yytext());        tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"}"   { return symbol(Symb.corcheteB, yytext());        tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"+="  { return symbol(Symb.masIgual, yytext());         tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"-="  { return symbol(Symb.menosIgual, yytext());       tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"*="  { return symbol(Symb.asteriscoIgual, yytext());   tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-"/="  { return symbol(Symb.divIgual, yytext());         tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
+"!"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.negacion, yytext());           }
+"&&"  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.op_and, yytext());             }
+"^"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));                                                    }
+"=="  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.igual_igual, yytext());        }
+"!="  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.diferente, yytext());          }
+"||"  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.op_or, yytext());              }
+"<="  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.menor_igual, yytext());        }
+"<"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.menor, yytext());              }
+">="  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.mayor_igual, yytext());        }
+">"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.mayor, yytext());              }
+"&"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
+"|"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
+"~"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
+"+"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.mas, yytext());              }
+"-"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.menos, yytext());            }
+"*"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.por, yytext());              }
+"/"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.div, yytext());              }
+"%"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.porcentaje, yytext());       }
+"**"  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
+"<<"  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
+">>"  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
+"="   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.igual, yytext());             }
+","   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.coma, yytext());              }
+";"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.punto_coma, yytext());        }
+"."   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.punto, yytext());             }
+"("   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.O_Parent_R, yytext());        }
+")"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.C_Parent_R, yytext());        }
+"["   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.O_Parent_C , yytext());       }
+"]"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.C_Parent_C, yytext());        }
+"?"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.interrogacion_C, yytext());   }
+":"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.punto_punto, yytext());       }
+"{"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.O_Parent_L , yytext());       }
+"}"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.C_Parent_L, yytext());        }
+"+="  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.mas_igual, yytext());         }
+"-="  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.menos_igual, yytext());       }
+"*="  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.por_igual, yytext());         }
+"/="  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.div_igual, yytext());         }
 
 //corchete
 
@@ -268,43 +335,43 @@ yybegin(filtro);
 /*************************************[ operator ]************************************************/
 <operator>{
   [^]  {
-if (string.toString().equals("!"))        return symbol(Symb.dif,   string.toString());           tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));
-if (string.toString().equals("&&"))       return symbol(Symb.andD,  string.toString());           tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals("^"))        return symbol(Symb.techo, string.toString());           tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));
-if (string.toString().equals("=="))       return symbol(Symb.igualD, string.toString());          tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals("!="))       return symbol(Symb.difIgual,string.toString());         tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "||"))      return symbol(Symb.oD, string.toString());              tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals("<="))       return symbol(Symb.menorI,string.toString());           tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "<" ))      return symbol(Symb.menor,string.toString());            tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals(">="))       return symbol(Symb.mayorI,string.toString());           tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));
-if (string.toString().equals(">"))        return symbol(Symb.mayor, string.toString());           tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals("&" ))       return symbol(Symb.and,string.toString());              tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "|"))       return symbol(Symb.o, string.toString());               tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "~"))       return symbol(Symb.techoT,string.toString());           tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "+" ))      return symbol(Symb.mas, string.toString());             tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "-" ))      return symbol(Symb.menos,string.toString());            tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "*" ))      return symbol(Symb.asterisco,string.toString());        tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "/"))       return symbol(Symb.div,string.toString());              tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "%" ))      return symbol(Symb.porcentaje,string.toString());       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "**"))      return symbol(Symb.asteriscoD,string.toString());       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals("<<"))       return symbol(Symb.menorD,string.toString());           tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( ">>"))      return symbol(Symb.mayorD,string.toString());           tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "="))       return symbol(Symb.igual,string.toString());            tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( ","))       return symbol(Symb.coma,string.toString());             tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( ";"))       return symbol(Symb.puntoComa,string.toString());        tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "."))       return symbol(Symb.punto,string.toString());            tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "("))       return symbol(Symb.parentesisA,string.toString());      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( ")"))       return symbol(Symb.parentesisB,string.toString());      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "["))       return symbol(Symb.parentesisCA,string.toString());     tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "]"))       return symbol(Symb.parentesisCB,string.toString());     tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "?"))       return symbol(Symb.preg,string.toString());             tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( ":"))       return symbol(Symb.dosP,string.toString());             tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "{"))       return symbol(Symb.corcheteA,string.toString());        tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "}"))       return symbol(Symb.corcheteB,string.toString());        tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "+="))      return symbol(Symb.masIgual,string.toString());         tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "-="))      return symbol(Symb.menosIgual,string.toString());       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "*="))      return symbol(Symb.asteriscoIgual,string.toString());   tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
-if (string.toString().equals( "/="))      return symbol(Symb.divIgual, string.toString());        tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));
+if (string.toString().equals("!")){        tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));          return symbol(Symb.negacion,   string.toString());}
+if (string.toString().equals("&&")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.op_and,  string.toString());}
+if (string.toString().equals("^")){        tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
+if (string.toString().equals("==")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.igual_igual, string.toString()); }
+if (string.toString().equals("!=")){       tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));          return symbol(Symb.diferente,string.toString());  }       
+if (string.toString().equals( "||")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.op_or, string.toString());     }        
+if (string.toString().equals("<=")){       tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));          return symbol(Symb.menor_igual,string.toString());  }         
+if (string.toString().equals( "<" )){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.menor,string.toString());        }    
+if (string.toString().equals(">=")){       tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));          return symbol(Symb.mayor_igual,string.toString());   }        
+if (string.toString().equals(">")){        tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.mayor, string.toString());       }    
+if (string.toString().equals("&" )){       tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
+if (string.toString().equals( "|")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));}
+if (string.toString().equals( "~")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));}
+if (string.toString().equals( "+" )){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.mas, string.toString());        }     
+if (string.toString().equals( "-" )){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.menos,string.toString());            }
+if (string.toString().equals( "*" )){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.por,string.toString());        }
+if (string.toString().equals( "/")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.div,string.toString());              }
+if (string.toString().equals( "%" )){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.porcentaje,string.toString());       }
+if (string.toString().equals( "**")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));}
+if (string.toString().equals("<<")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));}
+if (string.toString().equals( ">>")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));}
+if (string.toString().equals( "=")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.igual,string.toString());            }
+if (string.toString().equals( ",")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.coma,string.toString());             }
+if (string.toString().equals( ";")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.punto_coma,string.toString());        }
+if (string.toString().equals( ".")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.punto,string.toString());            }
+if (string.toString().equals( "(")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.O_Parent_R,string.toString());      }
+if (string.toString().equals( ")")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.C_Parent_R,string.toString());      }
+if (string.toString().equals( "[")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.O_Parent_C ,string.toString());     }
+if (string.toString().equals( "]")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.C_Parent_C,string.toString());     }
+if (string.toString().equals( "?")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.interrogacion_C,string.toString());             }
+if (string.toString().equals( ":")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.punto_punto,string.toString());             }
+if (string.toString().equals( "{")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.O_Parent_L ,string.toString());        }
+if (string.toString().equals( "}")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.C_Parent_L,string.toString());        }
+if (string.toString().equals( "+=")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.mas_igual,string.toString());         }
+if (string.toString().equals( "-=")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.menos_igual,string.toString());       }
+if (string.toString().equals( "*=")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.por_igual,string.toString());   }
+if (string.toString().equals( "/=")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.div_igual, string.toString());        }
 yybegin(YYINITIAL);}
 } 
 
@@ -315,11 +382,11 @@ yybegin(YYINITIAL);}
   "+" |"-" | "*" |"/" |"%" |"**"| "<<" |">>"|"="|"," |";"|"."|
   "(" | ")" |"[" | "]" | "?"|":" |"{"|"}"|"+="|"-="|"*=" |"/=" 
   {         
-    return symbol(Symb.ID, yytext());  //OJO AQUI
     tokens.add(new Token(string.toString(), yyline, yycolumn, "Identificador"));
     string.setLength(0);
     string.append(yytext());
     yybegin(operator);
+    return symbol(Symb.ident, yytext());  //OJO AQUI
   }
 
   {simbolos}  {string.append(yytext()) ;
@@ -332,9 +399,9 @@ yybegin(YYINITIAL);}
   }
 
   [^]   {
-    return symbol(Symb.ID, yytext());  //OJO AQUI
     tokens.add(new Token(string.toString(), yyline, yycolumn, "Identificador"));
     yybegin(YYINITIAL);
+    return symbol(Symb.ident, yytext());  //OJO AQUI
   }            
 
 }
@@ -360,7 +427,7 @@ yybegin(YYINITIAL);}
   \" {
     yybegin(YYINITIAL);
     tokens.add(new Token(string.toString(), yyline, yycolumn, "Literal string"));
-    return symbol(Symb.cadena, yytext());  
+    return symbol(Symb.string, yytext());  
   }
 
   {LineTerminator} { 
@@ -408,7 +475,7 @@ yybegin(YYINITIAL);}
     yybegin(YYINITIAL);
     string.append( yytext() ); 
     tokens.add(new Token(string.toString(), yyline, yycolumn, "Literal hexadecimal/Palabra Reservada")); 
-    return symbol(Symb.numhex, yytext());  
+    return symbol(Symb.numero, yytext());  
   }
 
   \' {
@@ -423,7 +490,7 @@ yybegin(YYINITIAL);}
     tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); 
     errores.add(new Token("Comillas", yyline, yycolumn, "Error: hexadecimal sin cierre"));
     yybegin(YYINITIAL);
-    return symbol(Symb.puntoComa, yytext());  
+    return symbol(Symb.punto_coma, yytext());  
   }
 
   {lettersH} {
@@ -460,7 +527,7 @@ yybegin(YYINITIAL);}
     yybegin(YYINITIAL);
     string.append( yytext() ); 
     tokens.add(new Token(string.toString(), yyline, yycolumn, "Literal hexadecimal/Palabra Reservada")); 
-    return symbol(Symb.numhexc, yytext());
+    return symbol(Symb.numero, yytext());
   }
 
   \" {
@@ -475,7 +542,7 @@ yybegin(YYINITIAL);}
     tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); 
     errores.add(new Token("Comillas", yyline, yycolumn, "Error: hexadecimal sin cierre"));
     yybegin(YYINITIAL);
-    return symbol(Symb.puntoComa, yytext());  
+    return symbol(Symb.punto_coma, yytext());  
   }
 
   {lettersH} { 
