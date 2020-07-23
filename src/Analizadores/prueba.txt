@@ -7,29 +7,34 @@ contract contratoA {
 
         while ( true == false ) {
             saldoTemporal = 10 ;
-        }
+            
+            while (true == true ) {
+                return ;
+            }
 
-        do {
-            saldoTemporal = cambiarSaldoCorrespondiente ( ) ;
-        }
-        while ( false >= true ) ;
+            do {
+                saldoTemporal = cambiarSaldoCorrespondiente ( ) ;
+            }
+            while ( false >= true ) ;
 
-        for ( saldoTemporal = 0 ; true == true ; saldoTemporal  ) { //Revisar segunda expresion
-            deudor = cambiarDeudor ( ) ;
-        }
+            for ( saldoTemporal = 0 ; true == true ; saldoTemporal  ) { //Revisar segunda expresion
+                deudor = cambiarDeudor ( ) ;
+            }
 
-        if ( true == true ) { //Arreglar expresion booleana
-            deudor = cambiarCuenta ( ) ;
-        }
+            if ( true == true ) { //Arreglar expresion booleana
+                deudor = cambiarCuenta ( ) ;
+            }
 
-        if (false == false) {
-            deudor = cuentaAnterior ( ) ;
-        }
-        else {
-            deudor = cuentaActual ( ) ;
-        }
+            if (false == false) {
+                deudor = cuentaAnterior ( ) ;
+            }
+            else {
+                deudor = cuentaActual ( ) ;
+            }
 
-        precioCobro = ( true == true ) ? false : true;
+            precioCobro = ( true == true ) ? 2 + 2 : true; //parentesis para cada expresion
+
+        }
 
         return 20 ;
     }

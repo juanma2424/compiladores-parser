@@ -120,7 +120,7 @@ STRU_IF_LINE ::= O_Parent_R OP_BOOL C_Parent_R interrogacion_C EXP punto_punto E
 BODY_SENT_M ::= BODY_SENT BODY_SENT_M | ;
 BODY_SENT ::= ident BODY_SENT_P | thisSoli punto ident igual EXP punto_coma
     | whileSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L
-    | forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma EXP C_Parent_R O_Parent_L BODY_SENT punto_coma BODY_SENT_M C_Parent_L
+    | forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma EXP C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L
     | doSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L whileSoli O_Parent_R OP_BOOL C_Parent_R punto_coma
     | STRU_IF_ELSE_IN
     | returnSoli punto_coma | breakSoli punto_coma | continueSoli punto_coma;
