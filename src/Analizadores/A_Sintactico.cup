@@ -50,7 +50,7 @@ action code
 
 /*--------------- 2da Area: Declaraciones -----------------------*/
 //------> declaracion de terminales 
-terminal pragma, solidity, techo, contract, O_Parent_L, C_Parent_L, epsilon,enumSoli, punto_coma, coma, bool, byteSoli, bytes, uint, uint_O, uint_DS, uint_TD, uint_SC, uint_CVO, uint_DCS, intSoli, int_O, int_DS, int_TD, int_SC, int_CVO, int_DCS, address, address_payable, O_Parent_C, C_Parent_C, publicSoli, privateSoli, igual, trueSoli, falseSoli, igual_igual , mayor_igual , mayor , menor_igual , menor , diferente , op_or , op_and , negacion, mas , menos , div , por , O_Parent_R , C_Parent_R , porcentaje , mas_igual , menos_igual , por_igual , div_igual, punto, thisSoli, whileSoli, returnSoli, breakSoli, continueSoli, forSoli, doSoli, ifSoli, elseSoli, interrogacion_C, punto_punto, structSoli, functionSoli, payableSoli, internalSoli, returns, charss, string;
+terminal pragma, solidity, techo, contract, O_Parent_L, C_Parent_L, epsilon,enumSoli, punto_coma, coma, bool, byteSoli, bytes, uint, uint_O, uint_DS, uint_TD, uint_SC, uint_CVO, uint_DCS, intSoli, int_O, int_DS, int_TD, int_SC, int_CVO, int_DCS, address, address_payable, O_Parent_C, C_Parent_C, publicSoli, privateSoli, igual, trueSoli, falseSoli, igual_igual , mayor_igual , mayor , menor_igual , menor , diferente , op_or , op_and , negacion, mas , menos , div , por , O_Parent_R , C_Parent_R , porcentaje , mas_igual , menos_igual , por_igual , div_igual, punto, thisSoli, whileSoli, returnSoli, breakSoli, continueSoli, forSoli, doSoli, ifSoli, elseSoli, interrogacion_C, punto_punto, structSoli, functionSoli, payableSoli, internalSoli, returns, charss, string, ufixedSoli, B_I , B_II , B_III , B_IV , B_V , B_VI , B_VII , B_IIX , B_IX , B_X , B_XI , B_XII , B_XIII , B_XIV , B_XV , B_XVI , B_XVII , B_XIIX , B_XIX , B_XX , B_XXI , B_XXII , B_XXIII , B_XXIV , B_XXV , B_XXVI , B_XXVII , B_XXIIX , B_XXIX , B_XXX , B_XXXI , B_XXXII;
 terminal String ident, numero,numero_HEX,stringSoli;
 
 //------> declaracion de no terminales
@@ -199,4 +199,4 @@ BODY_LIT_TF ::= numero_HEX | stringSoli;
 
 
 /*------------------------ TIPOS Datos ------------------------------*/
-TIPO ::= bool | byteSoli | bytes | string | uint | uint_O | uint_DS | uint_TD | uint_SC | uint_CVO | uint_DCS  | intSoli | int_O | int_DS | int_TD | int_SC | int_CVO | int_DCS | address | address_payable | charss | ufixed;
+TIPO ::= bool | byteSoli | bytes | string | uint | uint_O | uint_DS | uint_TD | uint_SC | uint_CVO | uint_DCS  | intSoli | int_O | int_DS | int_TD | int_SC | int_CVO | int_DCS | address | address_payable | charss | ufixedSoli | B_I | B_II | B_III | B_IV | B_V | B_VI | B_VII | B_IIX | B_IX | B_X | B_XI | B_XII | B_XIII | B_XIV | B_XV | B_XVI | B_XVII | B_XIIX | B_XIX | B_XX | B_XXI | B_XXII | B_XXIII | B_XXIV | B_XXV | B_XXVI | B_XXVII | B_XXIIX | B_XXIX | B_XXX | B_XXXI | B_XXXII;

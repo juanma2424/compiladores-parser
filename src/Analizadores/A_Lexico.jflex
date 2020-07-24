@@ -33,7 +33,7 @@ import java_cup.runtime.*;
     }
      private Symbol symbol(int type, Object value) {
        System.out.println(value);
-       System.out.println(type);
+      //  System.out.println(type);
       return new Symbol(type, yyline, yycolumn, value);
     }
 
@@ -93,44 +93,44 @@ numeroEX = (  ( {numbersH} | {numeroD} )+ "e" ("-"|"") {numbersH} )
 <YYINITIAL> "byte"   { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.byteSoli, yytext());}
 
 
-<YYINITIAL>"bytes1"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes2"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes3"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes4"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes5"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes1"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_I, yytext());}
+<YYINITIAL>"bytes2"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_II, yytext());}
+<YYINITIAL>"bytes3"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_III, yytext());}
+<YYINITIAL>"bytes4"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_IV, yytext());}
+<YYINITIAL>"bytes5"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_V, yytext());}
 
-<YYINITIAL>"bytes6"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes7"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes8"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes9"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes10" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes6"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_VI, yytext());}
+<YYINITIAL>"bytes7"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_VII, yytext());}
+<YYINITIAL>"bytes8"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_IIX, yytext());}
+<YYINITIAL>"bytes9"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_IX, yytext());}
+<YYINITIAL>"bytes10" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_X, yytext());}
 
-<YYINITIAL>"bytes11" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes12" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes13" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes14" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes15" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes11" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XI, yytext());}
+<YYINITIAL>"bytes12" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XII, yytext());}
+<YYINITIAL>"bytes13" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XIII, yytext());}
+<YYINITIAL>"bytes14" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XIV, yytext());}
+<YYINITIAL>"bytes15" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XV, yytext());}
 
-<YYINITIAL>"bytes16" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes17" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes18" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes19" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes20" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes16" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XVI, yytext());}
+<YYINITIAL>"bytes17" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XVII, yytext());}
+<YYINITIAL>"bytes18" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XIIX, yytext());}
+<YYINITIAL>"bytes19" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XIX, yytext());}
+<YYINITIAL>"bytes20" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XX, yytext());}
 
-<YYINITIAL>"bytes21" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes22" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes23" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes24" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes25" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes21" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XXI, yytext());}
+<YYINITIAL>"bytes22" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XXII, yytext());}
+<YYINITIAL>"bytes23" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XXIII, yytext());}
+<YYINITIAL>"bytes24" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XXIV, yytext());}
+<YYINITIAL>"bytes25" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XXV, yytext());}
 
-<YYINITIAL>"bytes26" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes27" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes28" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes29" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes26" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XXVI, yytext());}
+<YYINITIAL>"bytes27" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XXVII, yytext());}
+<YYINITIAL>"bytes28" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XXIIX, yytext());}
+<YYINITIAL>"bytes29" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XXIX, yytext());}
 
-<YYINITIAL>"bytes30" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes31" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-<YYINITIAL>"bytes32" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL>"bytes30" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XXX, yytext());}
+<YYINITIAL>"bytes31" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XXXI, yytext());}
+<YYINITIAL>"bytes32" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_XXXII, yytext());}
 
 <YYINITIAL> "constructor" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
 <YYINITIAL> "continue"   { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.continueSoli, yytext());}
@@ -172,7 +172,7 @@ numeroEX = (  ( {numbersH} | {numeroD} )+ "e" ("-"|"") {numbersH} )
 <YYINITIAL> "struct"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.structSoli, yytext());}
 <YYINITIAL> "this"       { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.thisSoli, yytext());}
 <YYINITIAL> "true"       { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.trueSoli, yytext());}
-<YYINITIAL> "ufixed"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
+<YYINITIAL> "ufixed"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.ufixedSoli, yytext());}
 
 
 // UINT "uint"(256|128|64|32|16|8)?
@@ -221,12 +221,6 @@ numeroEX = (  ( {numbersH} | {numeroD} )+ "e" ("-"|"") {numbersH} )
                       string.append(yytext());
                       yybegin(hexaStateC);}
 <YYINITIAL> "hex"  {  tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
-
-
-
-<YYINITIAL> "epsilon" { return symbol(Symb.epsilon, yytext()); }
-
-
 
 
 
