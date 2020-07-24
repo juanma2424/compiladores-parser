@@ -54,7 +54,7 @@ terminal pragma, solidity, techo, contract, O_Parent_L, C_Parent_L, epsilon,enum
 terminal String ident, numero,numero_HEX,string;
 
 //------> declaracion de no terminales
-non terminal String INICIO, NUMERO_P, BODY_CONTRACT, BODY_CONTRACT_P, BODY_CONTRACT_PP, BODY_CONTRACT_PPP, BODY_CONTRACT_PPPP, EN, VAR, STRU, FUNC, EN_IDENT, TIPO, VAR_ARR, VAR_ACCESS, VAR_CONTRACT, VAR_CONTRACT_S, VAR_CONTRACT_C, ASSIGN, VAL_LIT, EXP, OP_ARIT, EXP_ARIT, OP,OP_BOOL,EXP_BOOL,OP_OP_BOOL, OP_ARIT_P, OP_BOOL_P,FUNC_CALL,FUNC_CALL_P,FUNC_CALL_PARAMS,FUNC_CALL_PARAMS_P, IDENT_BODY, IDENT_BODY_P, IDENT_BODY_PP,BODY_LIT_TF, VAR_CONTRACT_P, STRU_WHILE, BODY_SENT, BODY_WHILE, BODY_ASSIGN, BODY_SENT_P, BODY_FUN_CALL, BODY_SENT_M, STRU_FOR, FOR_VAR, STRU_DO_WHILE, STRU_IF, STRU_ELSE, STRU_IF_LINE, IF_LINE_VAR, IF_LINE_VAR_P, STRUCTURE, STRUCTURE_VAR, STRU_IF_ELSE_IN, STRU_ELSE_IN, CUERPO, CUERPO_ASSIGN, FUNC_PARAM, FUNC_MOD, FUNC_RETURNS, CUERPO_M, CUERPO_ASSIGN_P, ASSIGN_NOT_VAR, BODY_SENT_PP, CUERPO_P, EXP_P, EXP_PP, OPERATION_IDENT, OPERATION_IDENT_THIS, OPERATION_IDENT_P, OPERATION_IDENT_PP, OPERATION_IDENT_THIS_P, OPERATION_IDENT_THIS_PP, FUNC_CALL_EXP, FUNC_CALL_PARAMS_EXP, FUNC_CALL_PARAMS_EXP_P, EXP_PPP, EXP_PI, EXP_PII, FUNC_CALL_EXP_P, EXP_PF, SI_NO_PARENT, OPERATION_IDENT_PI, FUNC_CALL_PARAMS_EXP_PI;
+non terminal String INICIO, NUMERO_P, BODY_CONTRACT, BODY_CONTRACT_P, BODY_CONTRACT_PP, BODY_CONTRACT_PPP, BODY_CONTRACT_PPPP, EN, VAR, STRU, FUNC, EN_IDENT, TIPO, VAR_ARR, VAR_ACCESS, VAR_CONTRACT, VAR_CONTRACT_S, VAR_CONTRACT_C, ASSIGN, VAL_LIT, EXP, OP_ARIT, EXP_ARIT, OP,OP_BOOL,EXP_BOOL,OP_OP_BOOL, OP_ARIT_P, OP_BOOL_P,FUNC_CALL,FUNC_CALL_P,FUNC_CALL_PARAMS,FUNC_CALL_PARAMS_P, IDENT_BODY, IDENT_BODY_P, IDENT_BODY_PP,BODY_LIT_TF, VAR_CONTRACT_P, STRU_WHILE, BODY_SENT, BODY_WHILE, BODY_ASSIGN, BODY_SENT_P, BODY_FUN_CALL, BODY_SENT_M, STRU_FOR, FOR_VAR, STRU_DO_WHILE, STRU_IF, STRU_ELSE, STRU_IF_LINE, IF_LINE_VAR, IF_LINE_VAR_P, STRUCTURE, STRUCTURE_VAR, STRU_IF_ELSE_IN, STRU_ELSE_IN, CUERPO, CUERPO_ASSIGN, FUNC_PARAM, FUNC_MOD, FUNC_RETURNS, CUERPO_M, CUERPO_ASSIGN_P, ASSIGN_NOT_VAR, BODY_SENT_PP, CUERPO_P, EXP_P, EXP_PP, OPERATION_IDENT, OPERATION_IDENT_THIS, OPERATION_IDENT_P, OPERATION_IDENT_PP, OPERATION_IDENT_THIS_P, OPERATION_IDENT_THIS_PP, FUNC_CALL_EXP, FUNC_CALL_PARAMS_EXP, FUNC_CALL_PARAMS_EXP_P, EXP_PPP, EXP_PI, EXP_PII, FUNC_CALL_EXP_P, EXP_PF, SI_NO_PARENT, OPERATION_IDENT_PI, FUNC_CALL_PARAMS_EXP_PI, OP_EXCL, BOOL_GATE, FUNC_CALL_CASE, FUNC_CALL_CASE_P, ARIT_GATE, OP_ARIT_Parent, EXP_P_S;
 
 precedence left porcentaje, mas_igual, por_igual, div_igual, menos_igual;
 precedence nonassoc C_Parent_R;
@@ -98,7 +98,7 @@ STRUCTURE_VAR ::= TIPO VAR_ARR VAR_ACCESS ident punto_coma STRUCTURE_VAR | ;
 STRU ::= STRU_WHILE | STRU_FOR | STRU_DO_WHILE | STRU_IF;
 
 /*--------------------------- While ---------------------------------*/
-STRU_WHILE ::= whileSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L;
+STRU_WHILE ::= whileSoli O_Parent_R EXP C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L;
 
 /*---------------------------- For ----------------------------------*/
 STRU_FOR ::= forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma EXP C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L;
@@ -158,67 +158,45 @@ VAR_ACCESS ::= publicSoli | privateSoli | ;
 
 
 /*------------------------ Expresiones ------------------------------*/
-EXP ::= ident EXP_P | thisSoli EXP_PP | BODY_LIT_TF | OP_ARIT | OP_BOOL;
-// EXP_P ::= IDENT_BODY | OP_ARIT | OP_BOOL | FUNC_CALL;
-// EXP_P ::= IDENT_BODY | O_Parent_R ident EXP_PI | O_Parent_R thisSoli punto ident SI_NO_PARENT EXP_PI | O_Parent_R OPERATION_IDENT_PI;
-EXP_P ::= IDENT_BODY | O_Parent_R EXP_PF;
-// EXP_PII ::= OPERATION_IDENT | FUNC_CALL_EXP;
+/*-------------------- Expresio Principal ---------------------------*/
+EXP ::= ident EXP_P | thisSoli EXP_PP | BODY_LIT_TF | ARIT_GATE | BOOL_GATE;
 
-EXP_PP ::= IDENT_BODY_P | punto ident O_Parent_R EXP_PF;
-// EXP_PPP ::= OPERATION_IDENT_THIS | FUNC_CALL;
-// EXP ::= BODY_LIT_TF | IDENT_BODY | OP_ARIT | OP_BOOL | FUNC_CALL;
+//Operacion booleana con true o false de primero
+BOOL_GATE ::= trueSoli OP_BOOL_P | falseSoli OP_BOOL_P;
+ARIT_GATE ::= numero OP_ARIT_P;
 
-EXP_PF ::= ident EXP_PI | thisSoli punto ident EXP_PI | OPERATION_IDENT_PI | FUNC_CALL_PARAMS_EXP_PI;
-EXP_PI ::= OPERATION_IDENT | FUNC_CALL_EXP_P;
-EXP_PII ::= OPERATION_IDENT_P | FUNC_CALL_EXP;
-// SI_NO_PARENT ::= O_Parent_R C_Parent_R | ;
+//Filto en caso id.id
+EXP_P ::= punto ident EXP_P_S| EXP_P_S;
 
-/*------------------- ASIGNACIONES DEL CUERPO -----------------------*/
-CUERPO_ASSIG ::= ident igual EXP;
+//caso funcion | Caso operacion aritmetica | Caso operacion booleana
+EXP_P_S ::= O_Parent_R FUNC_CALL_CASE | OP_EXCL OP_ARIT | OP_OP_BOOL OP_BOOL | ;
+
+//caso funcion | Caso operacion aritmetica | Caso operacion booleana
+EXP_PP ::= punto ident EXP_PPP;
+EXP_PPP ::= O_Parent_R FUNC_CALL_CASE | OP_EXCL OP_ARIT | OP_OP_BOOL OP_BOOL | ;
 
 /*--------------------- LLamadas a funciones ------------------------*/
-FUNC_CALL ::= O_Parent_R FUNC_CALL_PARAMS C_Parent_R;
-FUNC_CALL_PARAMS ::= ident FUNC_CALL_PARAMS_P | ;
-FUNC_CALL_PARAMS_P ::= coma ident FUNC_CALL_PARAMS_P | ;
-
-FUNC_CALL_EXP ::= O_Parent_R FUNC_CALL_PARAMS_EXP C_Parent_R | punto ident O_Parent_R FUNC_CALL_PARAMS_EXP C_Parent_R;
-FUNC_CALL_EXP_P ::=  FUNC_CALL_PARAMS_EXP_PI;
-FUNC_CALL_PARAMS_EXP_PI ::= coma ident FUNC_CALL_PARAMS_EXP_PI | C_Parent_R;
-FUNC_CALL_PARAMS_EXP ::= ident FUNC_CALL_PARAMS_EXP_P | ;
-FUNC_CALL_PARAMS_EXP_P ::= coma ident FUNC_CALL_PARAMS_P | ;
-
+FUNC_CALL_CASE ::= ident FUNC_CALL_CASE_P | thisSoli punto ident FUNC_CALL_CASE_P | C_Parent_R;
+FUNC_CALL_CASE_P ::= coma FUNC_CALL_CASE | C_Parent_R ;
 
 /*------------------- Operaciones aritmeticas -----------------------*///NO TIENE PUNTO Y COMA
-OP_ARIT ::= numero OP_ARIT_P;
+OP_ARIT ::= numero OP_ARIT_P | ident OP_ARIT_Parent OP_ARIT_P | thisSoli punto ident OP_ARIT_Parent OP_ARIT_P;
 OP_ARIT_P ::= OP OP_ARIT | ;
-OPERATION_IDENT ::= OP OPERATION_IDENT_P;
-OPERATION_IDENT_P ::= numero OPERATION_IDENT | ident OPERATION_IDENT_PP OPERATION_IDENT | thisSoli punto ident OPERATION_IDENT;
-OPERATION_IDENT_PI ::= numero OPERATION_IDENT;
-OPERATION_IDENT_PP ::= punto ident | ;
+OP_ARIT_Parent ::= punto ident | ;
 
-OPERATION_IDENT_THIS ::= OP OPERATION_IDENT_THIS_P;
-OPERATION_IDENT_THIS_P ::= numero OPERATION_IDENT_THIS | ident OPERATION_IDENT_THIS_PP OPERATION_IDENT_THIS | thisSoli punto ident OPERATION_IDENT_THIS;
-OPERATION_IDENT_THIS_PP ::= punto ident | ;
 
 OP ::= mas | menos | div | por | O_Parent_R | C_Parent_R | porcentaje | mas_igual | menos_igual | por_igual | div_igual;
+OP_EXCL ::= mas | menos | div | por | porcentaje | mas_igual | menos_igual | por_igual | div_igual;
 
 /*-------------------- Operaciones booleanas ------------------------*///NO TIENE PUNTO Y COMA
-OP_BOOL ::= trueSoli OP_BOOL_P | falseSoli OP_BOOL_P;
+OP_BOOL ::= trueSoli OP_BOOL_P | falseSoli OP_BOOL_P | ident OP_BOOL_P;
 OP_BOOL_P ::= OP_OP_BOOL OP_BOOL | ;
 
 OP_OP_BOOL ::= igual_igual | mayor_igual | mayor | menor_igual | menor | diferente | op_or | op_and | negacion;
 
 
-/*------------------ IDENTIFICADORES DEL CUERPO ---------------------*///NO TIENE PUNTO Y COMA
-// IDENT_BODY ::= punto ident | punto ident O_Parent_R C_Parent_R | ;
-IDENT_BODY ::= punto ident IDENT_BODY_PP | ;
-IDENT_BODY_P ::= punto ident;
-// IDENT_BODY_PP ::= O_Parent_R C_Parent_R | ;
-
-
 /*---------------------- Literales de cuerpo ------------------------*///NO TIENE PUNTO Y COMA
 BODY_LIT_TF ::= numero_HEX | string;
-
 
 
 /*------------------------ TIPOS Datos ------------------------------*/
