@@ -50,8 +50,8 @@ action code
 
 /*--------------- 2da Area: Declaraciones -----------------------*/
 //------> declaracion de terminales 
-terminal pragma, solidity, techo, contract, O_Parent_L, C_Parent_L, epsilon,enumSoli, punto_coma, coma, bool, byteSoli, bytes, uint, uint_O, uint_DS, uint_TD, uint_SC, uint_CVO, uint_DCS, intSoli, int_O, int_DS, int_TD, int_SC, int_CVO, int_DCS, address, address_payable, O_Parent_C, C_Parent_C, publicSoli, privateSoli, igual, trueSoli, falseSoli, igual_igual , mayor_igual , mayor , menor_igual , menor , diferente , op_or , op_and , negacion, mas , menos , div , por , O_Parent_R , C_Parent_R , porcentaje , mas_igual , menos_igual , por_igual , div_igual, punto, thisSoli, whileSoli, returnSoli, breakSoli, continueSoli, forSoli, doSoli, ifSoli, elseSoli, interrogacion_C, punto_punto, structSoli, functionSoli, payableSoli, internalSoli, returns, charss, stringSoli;
-terminal String ident, numero,numero_HEX,string;
+terminal pragma, solidity, techo, contract, O_Parent_L, C_Parent_L, epsilon,enumSoli, punto_coma, coma, bool, byteSoli, bytes, uint, uint_O, uint_DS, uint_TD, uint_SC, uint_CVO, uint_DCS, intSoli, int_O, int_DS, int_TD, int_SC, int_CVO, int_DCS, address, address_payable, O_Parent_C, C_Parent_C, publicSoli, privateSoli, igual, trueSoli, falseSoli, igual_igual , mayor_igual , mayor , menor_igual , menor , diferente , op_or , op_and , negacion, mas , menos , div , por , O_Parent_R , C_Parent_R , porcentaje , mas_igual , menos_igual , por_igual , div_igual, punto, thisSoli, whileSoli, returnSoli, breakSoli, continueSoli, forSoli, doSoli, ifSoli, elseSoli, interrogacion_C, punto_punto, structSoli, functionSoli, payableSoli, internalSoli, returns, charss, string;
+terminal String ident, numero,numero_HEX,stringSoli;
 
 //------> declaracion de no terminales
 non terminal String INICIO, NUMERO_P, BODY_CONTRACT, BODY_CONTRACT_P, BODY_CONTRACT_PP, BODY_CONTRACT_PPP, BODY_CONTRACT_PPPP, EN, VAR, STRU, FUNC, EN_IDENT, TIPO, VAR_ARR, VAR_ACCESS, VAR_CONTRACT, VAR_CONTRACT_S, VAR_CONTRACT_C, ASSIGN, VAL_LIT, EXP, OP_ARIT, EXP_ARIT, OP,OP_BOOL,EXP_BOOL,OP_OP_BOOL, OP_ARIT_P, OP_BOOL_P,FUNC_CALL,FUNC_CALL_P,FUNC_CALL_PARAMS,FUNC_CALL_PARAMS_P, IDENT_BODY, IDENT_BODY_P, IDENT_BODY_PP,BODY_LIT_TF, VAR_CONTRACT_P, STRU_WHILE, BODY_SENT, BODY_WHILE, BODY_ASSIGN, BODY_SENT_P, BODY_FUN_CALL, BODY_SENT_M, STRU_FOR, FOR_VAR, STRU_DO_WHILE, STRU_IF, STRU_ELSE, STRU_IF_LINE, IF_LINE_VAR, IF_LINE_VAR_P, STRUCTURE, STRUCTURE_VAR, STRU_IF_ELSE_IN, STRU_ELSE_IN, CUERPO, CUERPO_ASSIGN, FUNC_PARAM, FUNC_MOD, FUNC_RETURNS, CUERPO_M, CUERPO_ASSIGN_P, ASSIGN_NOT_VAR, BODY_SENT_PP, CUERPO_P, EXP_P, EXP_PP, OPERATION_IDENT, OPERATION_IDENT_THIS, OPERATION_IDENT_P, OPERATION_IDENT_PP, OPERATION_IDENT_THIS_P, OPERATION_IDENT_THIS_PP, FUNC_CALL_EXP, FUNC_CALL_PARAMS_EXP, FUNC_CALL_PARAMS_EXP_P, EXP_PPP, EXP_PI, EXP_PII, FUNC_CALL_EXP_P, EXP_PF, SI_NO_PARENT, OPERATION_IDENT_PI, FUNC_CALL_PARAMS_EXP_PI, OP_EXCL, BOOL_GATE, FUNC_CALL_CASE, FUNC_CALL_CASE_P, ARIT_GATE, OP_ARIT_Parent, EXP_P_S;
@@ -156,7 +156,6 @@ VAR_ARR ::= O_Parent_C C_Parent_C | ;
 VAR_ACCESS ::= publicSoli | privateSoli | ;
 
 
-
 /*------------------------ Expresiones ------------------------------*/
 /*-------------------- Expresio Principal ---------------------------*/
 EXP ::= ident EXP_P | thisSoli EXP_PP | BODY_LIT_TF | ARIT_GATE | BOOL_GATE;
@@ -196,14 +195,8 @@ OP_OP_BOOL ::= igual_igual | mayor_igual | mayor | menor_igual | menor | diferen
 
 
 /*---------------------- Literales de cuerpo ------------------------*///NO TIENE PUNTO Y COMA
-BODY_LIT_TF ::= numero_HEX | string;
+BODY_LIT_TF ::= numero_HEX | stringSoli;
 
 
 /*------------------------ TIPOS Datos ------------------------------*/
-TIPO ::= bool | byteSoli | bytes | stringSoli | uint | uint_O | uint_DS | uint_TD | uint_SC | uint_CVO | uint_DCS  | intSoli | int_O | int_DS | int_TD | int_SC | int_CVO | int_DCS | address | address_payable;
-
-
-
-
-
-
+TIPO ::= bool | byteSoli | bytes | string | uint | uint_O | uint_DS | uint_TD | uint_SC | uint_CVO | uint_DCS  | intSoli | int_O | int_DS | int_TD | int_SC | int_CVO | int_DCS | address | address_payable | charss | ufixed;

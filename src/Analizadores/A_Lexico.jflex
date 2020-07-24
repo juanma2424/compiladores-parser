@@ -33,6 +33,7 @@ import java_cup.runtime.*;
     }
      private Symbol symbol(int type, Object value) {
        System.out.println(value);
+       System.out.println(type);
       return new Symbol(type, yyline, yycolumn, value);
     }
 
@@ -426,7 +427,7 @@ yybegin(YYINITIAL);}
   \" {
     yybegin(YYINITIAL);
     tokens.add(new Token(string.toString(), yyline, yycolumn, "Literal string"));
-    return symbol(Symb.string, yytext());  
+    return symbol(Symb.stringSoli, yytext());  
   }
 
   {LineTerminator} { 

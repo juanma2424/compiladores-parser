@@ -962,6 +962,7 @@ public class Lexer implements java_cup.runtime.Scanner {
     }
      private Symbol symbol(int type, Object value) {
        System.out.println(value);
+       System.out.println(type);
       return new Symbol(type, yyline, yycolumn, value);
     }
 
@@ -1529,7 +1530,7 @@ yybegin(filtro);
           case 30:
             { yybegin(YYINITIAL);
     tokens.add(new Token(string.toString(), yyline, yycolumn, "Literal string"));
-    return symbol(Symb.string, yytext());
+    return symbol(Symb.stringSoli, yytext());
             }
             // fall through
           case 140: break;

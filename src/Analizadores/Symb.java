@@ -40,7 +40,7 @@ public class Symb {
   public static final int doSoli = 65;
   public static final int uint = 15;
   public static final int elseSoli = 67;
-  public static final int string = 80;
+  public static final int string = 76;
   public static final int uint_DS = 17;
   public static final int payableSoli = 72;
   public static final int op_or = 44;
@@ -86,7 +86,7 @@ public class Symb {
   public static final int igual = 35;
   public static final int whileSoli = 60;
   public static final int punto_coma = 10;
-  public static final int stringSoli = 76;
+  public static final int stringSoli = 80;
   public static final int contract = 5;
   public static final int address = 29;
   public static final String[] terminalNames = new String[] {
@@ -166,11 +166,11 @@ public class Symb {
   "internalSoli",
   "returns",
   "charss",
-  "stringSoli",
+  "string",
   "ident",
   "numero",
   "numero_HEX",
-  "string"
+  "stringSoli"
   };
 }
 
