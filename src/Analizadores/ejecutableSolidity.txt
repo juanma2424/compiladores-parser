@@ -1,35 +1,36 @@
+pragma solidity ^ 0.4.0 ;
 contract NombreContrato {
-		enum NombreEnum { id1 , id2 , id2 }
-		int public IdVariable ;
-		int [] IdVariable ;
-		int public x = 2 ;
-		struct IdStruct {
- 			int public x ;
-		}
-		function idFuncion ( bool x , int y ) private returns ( string a ) {
-            int public IdVariable ;
-            int [] IdVariable ;
-            int public x = 2 ;
-            Variable = ide + 9 ;
-            NameFuncion ( Variable ) ;
-            while ( true ) { 
-                do {
-                    Variable = y ;
-                }
-                while ( cero == uno ) ;
-                Variable = x && id ;
-            }
-            Variable = 8 + 9 ;
-            NameFuncion ( Variable ) ;
-            while ( true ) { 
+    enum NombreEnum { id1 , id2 , id2 }
+    int public IdVariable ;
+    int [] IdVariable ;
+    int public x = 2 ;
+    struct IdStruct {
+        int public x ;
+    }
+    function idFuncion ( bool x , int y ) private returns ( string a ) {
+        int public IdVariable ;
+        int [] IdVariable ;
+        int public x = 2 ;
+        Variable = ide + 9 ;
+        NameFuncion ( Variable ) ;
+        while ( true ) { 
             do {
                 Variable = y ;
             }
-            while ( true == cero ) ;
-                Variable = x && id ;
-            }
-        return 2 ;
-		} 
+            while ( cero == uno ) ;
+            Variable = x && id ;
+        }
+        Variable = 8 + 9 ;
+        NameFuncion ( Variable ) ;
+        while ( true ) { 
+        do {
+            Variable = y ;
+        }
+        while ( true == cero ) ;
+            Variable = x && id ;
+        }
+    return 2 ;
+	} 
 }
 		
 

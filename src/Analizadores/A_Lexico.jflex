@@ -33,7 +33,7 @@ import java_cup.runtime.*;
     }
      private Symbol symbol(int type, Object value) {
        System.out.println(value);
-      //  System.out.println(type);
+       System.out.println(type);
       return new Symbol(type, yyline, yycolumn, value);
     }
 
@@ -269,7 +269,7 @@ yybegin(filtro);
 
 "!"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.negacion, yytext());           }
 "&&"  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.op_and, yytext());             }
-"^"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));                                                    }
+"^"   { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.techo, yytext());              }
 "=="  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.igual_igual, yytext());        }
 "!="  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.diferente, yytext());          }
 "||"  { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.op_or, yytext());              }
@@ -331,7 +331,7 @@ yybegin(filtro);
   [^]  {
 if (string.toString().equals("!")){        tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));          return symbol(Symb.negacion,   string.toString());}
 if (string.toString().equals("&&")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.op_and,  string.toString());}
-if (string.toString().equals("^")){        tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
+if (string.toString().equals("^")){        tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.techo, yytext());}
 if (string.toString().equals("==")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.igual_igual, string.toString()); }
 if (string.toString().equals("!=")){       tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));          return symbol(Symb.diferente,string.toString());  }       
 if (string.toString().equals( "||")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.op_or, string.toString());     }        
