@@ -60,6 +60,7 @@ start with INICIO;
 /*--------------------- Reglas Semanticas ---------------------------*/
 // INICIO ::= pragma solidity techo numero numero punto_coma INICIO_P;
 
+/* Si se coloca errores aquí se omiten todos los errores porsteriores*/
 INICIO ::= pragma solidity techo numero numero punto_coma contract ident O_Parent_L BODY_CONTRACT C_Parent_L INICIO_S ;
 INICIO_S ::= contract ident O_Parent_L BODY_CONTRACT C_Parent_L INICIO_S |  ;
 
@@ -75,6 +76,7 @@ FUNC_MOD ::= payableSoli | privateSoli | publicSoli | internalSoli | ;
 FUNC_RETURNS ::= returns O_Parent_R TIPO ident C_Parent_R | ;
 
 /*--------------------------- CUERPO --------------------------------*/
+/* Revisar declaraciones con tipo en cuerpo de funcion*/
 CUERPO_M ::= CUERPO_MA CUERPO_M | ;
 CUERPO_MA ::= TIPO VAR_ARR VAR_ACCESS ident CUERPO_ASSIGN_F | CUERPO ;
 CUERPO ::= ident igual CUERPO_P | ident punto ident igual CUERPO_P | EXP punto_coma | STRU;
@@ -93,7 +95,7 @@ STRUCTURE_VAR ::= TIPO VAR_ARR VAR_ACCESS ident punto_coma STRUCTURE_VAR | ;
 STRU ::= STRU_WHILE | STRU_FOR | STRU_DO_WHILE | STRU_IF;
 
 /*--------------------------- While ---------------------------------*/
-STRU_WHILE ::= whileSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L ; // aqui se agrego ----------
+STRU_WHILE ::= whileSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | whileSoli O_Parent_R error C_Parent_L; // aqui se agrego ----------
 
 /*---------------------------- For ----------------------------------*/
 STRU_FOR ::= forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma EXP C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L ; // aqui se agrego ----------
@@ -102,13 +104,15 @@ STRU_FOR ::= forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma EXP C_Pare
 STRU_DO_WHILE ::= doSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L whileSoli O_Parent_R OP_BOOL C_Parent_R punto_coma ; // aqui se agrego ----------
 
 /*---------------------------- if -----------------------------------*/
-STRU_IF ::= ifSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L STRU_ELSE ; // Aqui se agrego ----------
+STRU_IF ::= ifSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L STRU_ELSE | ifSoli error C_Parent_L; // Aqui se agrego ----------
 
 /*--------------------------- else ----------------------------------*/
-STRU_ELSE ::= elseSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | ; // Aqui se agrego ---------
+STRU_ELSE ::= elseSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | elseSoli error C_Parent_L | ; // Aqui se agrego ---------
 
 /*-------------------------- If line --------------------------------*/
-STRU_IF_LINE ::= O_Parent_R OP_BOOL C_Parent_R interrogacion_C EXP punto_punto EXP punto_coma ; // en espera de poncho-----------
+STRU_IF_LINE ::= O_Parent_R OP_BOOL C_Parent_R interrogacion_C EXP punto_punto EXP punto_coma 
+        | O_Parent_R error punto_coma 
+        | O_Parent_R OP_BOOL C_Parent_R interrogacion_C EXP error punto_coma ; // en espera de poncho-----------
 
 
 /*------------------------- BODY_SENT -------------------------------*////AGREGAR AQUI

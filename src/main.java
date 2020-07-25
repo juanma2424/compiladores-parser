@@ -29,7 +29,7 @@ public class main {
     public static void main(String[] args) {
         try {
             File file = new File(
-                    "/media/bryan/Disco 1/Documentos/Ingeniería en computación/Semestre V/Compiladores/Proyectos/Proyecto 2/Codigo/compiladores-parser/src/Analizadores/pruebas/PruebaVariables.txt");
+                    "/media/bryan/Disco 1/Documentos/Ingeniería en computación/Semestre V/Compiladores/Proyectos/Proyecto 2/Codigo/compiladores-parser/src/Analizadores/pruebas/PruebaExpresiones.txt");
             Lexer lexico = new Lexer(new BufferedReader(new FileReader(file)));
             analisis_sintactico sintactico = new analisis_sintactico(lexico);
             System.out.println("--------------------------- Parseando... ---------------------------");
