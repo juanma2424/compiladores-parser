@@ -12,13 +12,14 @@ public class main {
         for (Token t : Lexer.tokens) {
             t.print();
         }
-        
+
         System.out.println("--------------------------- Tokens incorrectos ---------------------------");
         System.out.println("\nErrores\n");
         for (Token t : Lexer.errores) {
             t.print();
         }
     }
+
     public static void accessErrors(analisis_sintactico parser) {
         for (TError t : analisis_sintactico.TablaES) {
             t.print();
@@ -28,7 +29,7 @@ public class main {
     public static void main(String[] args) {
         try {
             File file = new File(
-                    "C:\\Users\\alfon\\Documents\\compiladores-parser\\src\\Analizadores\\ejecutableSolidity.txt");
+                    "/media/bryan/Disco 1/Documentos/Ingeniería en computación/Semestre V/Compiladores/Proyectos/Proyecto 2/Codigo/compiladores-parser/src/Analizadores/pruebas/PruebaVariables.txt");
             Lexer lexico = new Lexer(new BufferedReader(new FileReader(file)));
             analisis_sintactico sintactico = new analisis_sintactico(lexico);
             System.out.println("--------------------------- Parseando... ---------------------------");

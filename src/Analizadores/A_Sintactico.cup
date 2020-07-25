@@ -85,7 +85,7 @@ CUERPO_ASSIGN_F ::= igual CUERPO_ASSIGN_FP | punto_coma;
 CUERPO_ASSIGN_FP ::= ASSIGN_NOT_VAR | STRU_IF_LINE;
 
 /*------------------------ Estructuras ------------------------------*/
-STRUCTURE ::= structSoli ident O_Parent_L TIPO VAR_ARR VAR_ACCESS ident punto_coma STRUCTURE_VAR C_Parent_L ; // aqui se agrego -----------
+STRUCTURE ::= structSoli ident O_Parent_L TIPO VAR_ARR VAR_ACCESS ident punto_coma STRUCTURE_VAR C_Parent_L | structSoli error C_Parent_L | structSoli ident error C_Parent_L ; // aqui se agrego -----------
 STRUCTURE_VAR ::= TIPO VAR_ARR VAR_ACCESS ident punto_coma STRUCTURE_VAR | ;
 
 //---------------------------------------------------------------------------------------------------------------------------//
@@ -140,7 +140,7 @@ EN ::= enumSoli ident O_Parent_L ident EN_IDENT C_Parent_L | enumSoli error C_Pa
 EN_IDENT ::= coma ident EN_IDENT | ;
 
 /*------------------------- VARIABLES -------------------------------*///INCOMPLETA
-VAR_CONTRACT ::= TIPO VAR_ARR VAR_ACCESS ident VAR_CONTRACT_P ;// Aque se agrego ----------------------------------------------
+VAR_CONTRACT ::= TIPO VAR_ARR VAR_ACCESS ident VAR_CONTRACT_P | TIPO error punto_coma ;// Aque se agrego ----------------------------------------------
 
 /*--------------- 1.A VARIABLES sin asignacion ----------------------*/
 VAR_CONTRACT_P ::= punto_coma | VAR_CONTRACT_C punto_coma;
