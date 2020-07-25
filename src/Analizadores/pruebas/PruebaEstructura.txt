@@ -1,6 +1,6 @@
 pragma solidity ^0.4.0;
 
-int x;    //se espera error de sintaxis por expresion fuera de funcion                         
+//int x;    //se espera error de sintaxis por expresion fuera de funcion                         
 
 contract Contrato{
 
