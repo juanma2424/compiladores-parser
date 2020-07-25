@@ -5,7 +5,7 @@ contract NombreContrato {
     struct IdStruct {
         int public x;
     }
-    function idFuncion ( bool x , int y ) private returns ( string a ) {
+    function idFuncion ( x , int y ) private returns ( string a ) {
         int public IdVariable ;
         int [] IdVariable ;
         int public x = 2 ;
@@ -18,10 +18,6 @@ contract NombreContrato {
             continue;
         }
 
-        for ( a = 2 ; a == true ; a + 3 ) {
-            x = 2;
-        }
-        
         Variable = ide + 9 ;
         NameFuncion ( Variable ) ;
         return 3; 

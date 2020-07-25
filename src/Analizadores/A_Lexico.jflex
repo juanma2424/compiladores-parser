@@ -29,7 +29,7 @@ import java_cup.runtime.*;
     }
      private Symbol symbol(int type, Object value) {
        System.out.println(value);
-       System.out.println(type);
+       //System.out.println(type);
       return new Symbol(type, yyline, yycolumn, value);
     }
 
@@ -56,7 +56,7 @@ operadorTableI = "&&"|"=="|"!="|"||"|"<="|"<"|">="|">"|
                  "+"|"-"|"*"|"%"|"="|","|";"|"."|"("|")"|
                  "["|"]"|"?"|"{"|"}"|"+="|"-="
 
-operadorTableX = "!"|"^"|"&"|"^"|"~"|"*"|"="|"/="|"<<"|">>"|"/"|"ñ"|"Ñ"|"%"
+operadorTableX = "!"|"^"|"&"|"^"|"~"|"*"|"/="|"<<"|">>"|"/"|"ñ"|"Ñ"|"%"
 
 /*********************************[ COMENTARIOS ]*************************************/
 /* comments */
