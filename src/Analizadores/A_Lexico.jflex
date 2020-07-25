@@ -20,13 +20,9 @@ import java_cup.runtime.*;
 
 %{
     StringBuffer string = new StringBuffer();
-    StringBuffer stringN = new StringBuffer();
-    public static int banderaN = 0;
     public static int bandera = 0;
-    public static int bandera2 = 0;
-    public static int bandera3 = 0;
     public static ArrayList<Token> tokens = new ArrayList<>();  
-    public static ArrayList<Token> errores = new ArrayList<>();  
+    public static ArrayList<Token> errores = new ArrayList<>();
 
     private Symbol symbol(int type) {
       return new Symbol(type, yyline, yycolumn);
@@ -39,8 +35,6 @@ import java_cup.runtime.*;
 
 %}
 
-
-simbolos = "~" | ")" | "]" |"}"
 LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
 WhiteSpace     = {LineTerminator} | [ \t\f]
@@ -49,11 +43,22 @@ lettersH       = [A-F]+
 numberN        = [0-9]+ | "."([0-9]+)
 L=[a-zA-Z_]+
 D=[0-9]+
-operadorTable = "!" | "&&"|"^" | "=="|"!="|"||"|"<="|"<" |">="|">" |"&"|"|"|"^"|
-"~" | "+" |"-" | "*" |"/" |"%" |"**"| "<<" |">>"|"="|
-"[" | "]" | "?"|":" |"{"|"}"|"+="|"-="|"*=" |"/="
 
-/*************************************************************************************/
+operadorTable = "!" | "&&"|"^" | "=="|"!="|"||"|"<="|"<" |">="|">" |"&"|"|"|"^"| 
+                 "~" | "+" |"-" | "" |"/" |"%" |"*"| "<<" |">>"|"="|
+                 "[" | "]" | "?"|":" |"{"|"}"|"+="|"-="|"*=" |"/="
+
+operadorTableD = "&&"|"=="|"!="|"||"|"<="|"<"|">="|">"| 
+                 "+"|"-"|"%"|"="|","|";"|"."|"("|")"|
+                 "["|"]"|"?"|"{"|"}"|"+="|"-="
+
+operadorTableI = "&&"|"=="|"!="|"||"|"<="|"<"|">="|">"| 
+                 "+"|"-"|"*"|"%"|"="|","|";"|"."|"("|")"|
+                 "["|"]"|"?"|"{"|"}"|"+="|"-="
+
+operadorTableX = "!"|"^"|"&"|"^"|"~"|"*"|"="|"/="|"<<"|">>"|"/"|"ñ"|"Ñ"|"%"
+
+/*********************************[ COMENTARIOS ]*************************************/
 /* comments */
 Comment = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment}
 
@@ -62,13 +67,14 @@ TraditionalComment   = "/*" [^*] ~"*/" | "/*" "*"+ "/"
 EndOfLineComment     = "//" {InputCharacter}* {LineTerminator}?
 DocumentationComment = "/**" {CommentContent} "*"+ "/"
 CommentContent       = ( [^*] | \*+ [^/*] )*
-/*************************************************************************************/
 
 
-//--------------------------NUEVO--NO--TOCA---CON--AMOR--JUANMA--11/07/2020-----------//
-Identifier =  {L}({L}|{D})*// [:jletter:] [:jletterdigit:]*
+/*******************************[ IDENTIFICADOR , NUM ]**************************************/
+Identifier =  {L}({L}|{D})*
 numeroD =  [0-9]*(".")[0-9]+ | [0-9]+(".")
 numeroEX = (  ( {numbersH} | {numeroD} )+ "e" ("-"|"") {numbersH} )
+
+
 /*************************************[STATES]************************************************/
 %state STRING
 %state Chars
@@ -76,22 +82,15 @@ numeroEX = (  ( {numbersH} | {numeroD} )+ "e" ("-"|"") {numbersH} )
 %state hexaStateC
 %state hexaStateError
 %state hexaStateCError
-%state stateNosibol
-%state filtro
-%state operator
 %%
-
-
 
 /*************************************[PRINCIPALES]**********************************************/
 
-/* keywords */
 <YYINITIAL> "address" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.address, yytext());}
 <YYINITIAL> "as"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
 <YYINITIAL> "bool"   { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.bool, yytext());}
 <YYINITIAL> "break"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.breakSoli, yytext());}
 <YYINITIAL> "byte"   { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.byteSoli, yytext());}
-
 
 <YYINITIAL>"bytes1"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_I, yytext());}
 <YYINITIAL>"bytes2"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.B_II, yytext());}
@@ -146,8 +145,6 @@ numeroEX = (  ( {numbersH} | {numeroD} )+ "e" ("-"|"") {numbersH} )
 <YYINITIAL> "if"         { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.ifSoli, yytext());}
 <YYINITIAL> "import"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
 
-
-//INT (256|128|64|32|16|8)?
 <YYINITIAL> "int"        { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.intSoli, yytext());}
 <YYINITIAL> "int8"       { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.int_O, yytext());}
 <YYINITIAL> "int16"      { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.int_DS, yytext());}
@@ -155,8 +152,6 @@ numeroEX = (  ( {numbersH} | {numeroD} )+ "e" ("-"|"") {numbersH} )
 <YYINITIAL> "int64"      { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.int_SC, yytext());}
 <YYINITIAL> "int128"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.int_CVO, yytext());}
 <YYINITIAL> "int256"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.int_DCS, yytext());}
-
-
 
 <YYINITIAL> "internal"   { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.internalSoli, yytext());}
 <YYINITIAL> "mapping"    { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
@@ -174,8 +169,6 @@ numeroEX = (  ( {numbersH} | {numeroD} )+ "e" ("-"|"") {numbersH} )
 <YYINITIAL> "true"       { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.trueSoli, yytext());}
 <YYINITIAL> "ufixed"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));return symbol(Symb.ufixedSoli, yytext());}
 
-
-// UINT "uint"(256|128|64|32|16|8)?
 <YYINITIAL>  "uint"      { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.uint, yytext());}
 <YYINITIAL>  "uint8"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.uint_O, yytext());}
 <YYINITIAL>  "uint16" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.uint_DS, yytext());}
@@ -183,7 +176,6 @@ numeroEX = (  ( {numbersH} | {numeroD} )+ "e" ("-"|"") {numbersH} )
 <YYINITIAL>  "uint64" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.uint_SC, yytext());}
 <YYINITIAL>  "uint128"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.uint_CVO, yytext());}
 <YYINITIAL>  "uint256"  { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.uint_DCS, yytext());}
-
 
 <YYINITIAL> "solidity" { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.solidity, yytext());}
 <YYINITIAL> "view"     { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));}
@@ -231,32 +223,20 @@ numeroEX = (  ( {numbersH} | {numeroD} )+ "e" ("-"|"") {numbersH} )
 {numbersH}+ {Identifier}+ {errores.add(new Token(yytext(), yyline, yycolumn, "Error: Numero"));}
 {numeroD}+ {Identifier}+  {errores.add(new Token(yytext(), yyline, yycolumn, "Error: Numero"));}
 {numeroEX}+ {Identifier}+  {errores.add(new Token(yytext(), yyline, yycolumn, "Error: Numero"));}
-
 {numbersH} { tokens.add(new Token(yytext(), yyline, yycolumn, "Literal: Numero")); return symbol(Symb.numero, yytext()); } 
 {numeroD}  { tokens.add(new Token(yytext(), yyline, yycolumn, "Literal: Numero")); return symbol(Symb.numero, yytext()); } 
 {numeroEX} { tokens.add(new Token(yytext(), yyline, yycolumn, "Literal: Numero")); return symbol(Symb.numero, yytext()); }
-
 (( {numbersH} | {numeroD})+ ("e")+ ("-"|"")* {numeroD})   {errores.add(new Token(yytext(), yyline, yycolumn, "Error: Numero"));}
 
 
 
-
 /*************************************[  IDENTIFICADORES ]************************************************/
-{Identifier}+ {operadorTable}+ {errores.add(new Token(yytext(), yyline, yycolumn, "Error Identificador"));}
-{simbolos}+ {Identifier}+ {
-  string.setLength(0);
-  string.append(yytext());
-  errores.add(new Token(string.toString(), yyline, yycolumn, "Error Decimal"));//WHY ERROR
-  yybegin(YYINITIAL);
-}
+{operadorTableX}+ {Identifier}+ | {operadorTableX}+ {Identifier}+ {operadorTableX}+ | {Identifier}+{operadorTableX}+  {errores.add(new Token(yytext(), yyline, yycolumn, "Error: identificador"));}
+{operadorTableX}+ {Identifier}+ {operadorTableX}+ {Identifier}* {errores.add(new Token(yytext(), yyline, yycolumn, "Error: identificador"));}
+{Identifier}+ {operadorTableX}+ {Identifier} {errores.add(new Token(yytext(), yyline, yycolumn, "Error: identificador"));}
+{Identifier}+ {operadorTableX}+ {Identifier}+ {errores.add(new Token(yytext(), yyline, yycolumn, "Error: identificador"));}
+{Identifier} { tokens.add(new Token(yytext(), yyline, yycolumn, "Identificador")); return symbol(Symb.ident,yytext()); }
 
-{Identifier} {
-stringN.setLength(0);
-string.setLength(0);
-string.append(yytext());
-stringN.append(yytext());
-yybegin(filtro);
-}
 
 /*************************************[ OPERADORES ]************************************************/
 \" { 
@@ -307,7 +287,7 @@ yybegin(filtro);
 
 //corchete
 
-/*************************************[ comments ]************************************************/
+/*************************************[ COMENTARIOS ]************************************************/
 /* comments */
 {Comment} { /* ignore */}
 
@@ -316,107 +296,14 @@ yybegin(filtro);
 
 
 
-/*************************************[ No simbolos ]************************************************/
-[^A-Za-z0-9\n\r\f\t\!\&\^\=\|\<\>\~\+\-\*\/\%\,\;\.\(\)\[\]\?\:\{\}] {
-     stringN.setLength(0);
-     stringN.append(yytext());
-     yybegin(stateNosibol);
-   }
-}
-
-
-
-/*************************************[ operator ]************************************************/
-<operator>{
-  [^]  {
-if (string.toString().equals("!")){        tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));          return symbol(Symb.negacion,   string.toString());}
-if (string.toString().equals("&&")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.op_and,  string.toString());}
-if (string.toString().equals("^")){        tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.techo, yytext());}
-if (string.toString().equals("==")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.igual_igual, string.toString()); }
-if (string.toString().equals("!=")){       tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));          return symbol(Symb.diferente,string.toString());  }       
-if (string.toString().equals( "||")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.op_or, string.toString());     }        
-if (string.toString().equals("<=")){       tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));          return symbol(Symb.menor_igual,string.toString());  }         
-if (string.toString().equals( "<" )){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.menor,string.toString());        }    
-if (string.toString().equals(">=")){       tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));          return symbol(Symb.mayor_igual,string.toString());   }        
-if (string.toString().equals(">")){        tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.mayor, string.toString());       }    
-if (string.toString().equals("&" )){       tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));}
-if (string.toString().equals( "|")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));}
-if (string.toString().equals( "~")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));}
-if (string.toString().equals( "+" )){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.mas, string.toString());        }     
-if (string.toString().equals( "-" )){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.menos,string.toString());            }
-if (string.toString().equals( "*" )){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.por,string.toString());        }
-if (string.toString().equals( "/")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.div,string.toString());              }
-if (string.toString().equals( "%" )){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.porcentaje,string.toString());       }
-if (string.toString().equals( "**")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));}
-if (string.toString().equals("<<")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));}
-if (string.toString().equals( ">>")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador"));}
-if (string.toString().equals( "=")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.igual,string.toString());            }
-if (string.toString().equals( ",")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.coma,string.toString());             }
-if (string.toString().equals( ";")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.punto_coma,string.toString());        }
-if (string.toString().equals( ".")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.punto,string.toString());            }
-if (string.toString().equals( "(")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.O_Parent_R,string.toString());      }
-if (string.toString().equals( ")")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.C_Parent_R,string.toString());      }
-if (string.toString().equals( "[")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.O_Parent_C ,string.toString());     }
-if (string.toString().equals( "]")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.C_Parent_C,string.toString());     }
-if (string.toString().equals( "?")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.interrogacion_C,string.toString());             }
-if (string.toString().equals( ":")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.punto_punto,string.toString());             }
-if (string.toString().equals( "{")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.O_Parent_L ,string.toString());        }
-if (string.toString().equals( "}")){       tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.C_Parent_L,string.toString());        }
-if (string.toString().equals( "+=")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.mas_igual,string.toString());         }
-if (string.toString().equals( "-=")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.menos_igual,string.toString());       }
-if (string.toString().equals( "*=")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.por_igual,string.toString());   }
-if (string.toString().equals( "/=")){      tokens.add(new Token(string.toString(), yyline, yycolumn, "Operador")); return symbol(Symb.div_igual, string.toString());        }
-yybegin(YYINITIAL);}
-} 
-
-
-/*************************************[ filtro ]************************************************/
-<filtro>{    
-  "!" | "&&"|"^" | "=="|"!="|"||"|"<="|"<" |">="|">" |"&"|"|"|"^"|
-  "+" |"-" | "*" |"/" |"%" |"**"| "<<" |">>"|"="|"," |";"|"."|
-  "(" | ")" |"[" | "]" | "?"|":" |"{"|"}"|"+="|"-="|"*=" |"/=" 
-  {         
-    tokens.add(new Token(string.toString(), yyline, yycolumn, "Identificador"));
-    string.setLength(0);
-    string.append(yytext());
-    yybegin(operator);
-    return symbol(Symb.ident, yytext());  //OJO AQUI
+/*************************************[ NO SIMBOLOS ]************************************************/
+{Identifier}* [^ A-Za-z0-9\n\r\f\t\!\&\^\=\|\<\>\~\+\-\/\%\,\;\.\(\)\[\]\?\:\{\} ]+  {Identifier}*  {
+    errores.add(new Token(yytext(), yyline, yycolumn, "Error: identificador 4"));
   }
-
-  {simbolos}  {string.append(yytext()) ;
-              errores.add(new Token(string.toString(), yyline, yycolumn, "Error Identificador"));
-              yybegin(YYINITIAL);}
-
-  [^ A-Za-z0-9\n\r\f\t\!\&\^\=\|\<\>\~\+\-\*\/\%\,\;\.\(\)\[\]\?\:\{\} ]   {
-    stringN.append(yytext());
-    yybegin(stateNosibol);
-  }
-
-  [^]   {
-    tokens.add(new Token(string.toString(), yyline, yycolumn, "Identificador"));
-    yybegin(YYINITIAL);
-    return symbol(Symb.ident, string.toString());  //OJO AQUI
-  }            
 
 }
 
-/*************************************[ No simbolos filtros ]************************************************/
-<stateNosibol>{
-   ("{" | "}" | "(" | ")" | ";" | "[" | "]" |"//" | ",")  {      
-        errores.add(new Token(stringN.toString(), yyline, yycolumn, "Error: identificador"));
-        string.setLength(0);
-        string.append(yytext());
-         yybegin(operator);
-        
-  }
-  ({WhiteSpace})  {   
-        errores.add(new Token(stringN.toString(), yyline, yycolumn, "Error: identificador"));
-        yybegin(YYINITIAL);
-  }
-  [^]  {stringN.append(yytext());yybegin(stateNosibol);}
-}
-
-/*************************************[ strings  ]************************************************/
+/*************************************[ STRINGS  ]************************************************/
 <STRING> {
   \" {
     yybegin(YYINITIAL);

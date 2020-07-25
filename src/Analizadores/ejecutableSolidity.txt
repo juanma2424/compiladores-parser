@@ -3,7 +3,7 @@ contract NombreContrato {
     enum NombreEnum { id1 , id2 , id2 }
     int public IdVariable ;
     int [] IdVariable ;
-    int public x%a = 2 ;
+    int public xa = 2 ;
     struct IdStruct {
         int public x ;
     }

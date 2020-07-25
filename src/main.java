@@ -1,7 +1,10 @@
 import Analizadores.*;
+import java_cup.runtime.Symbol;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.StringReader;
+import java.util.ArrayList;
 
 public class main {
     public static void accessToken (Lexer lexico){

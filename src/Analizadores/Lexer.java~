@@ -957,13 +957,14 @@ public class Lexer implements java_cup.runtime.Scanner {
     public static int bandera3 = 0;
     public static ArrayList<Token> tokens = new ArrayList<>();  
     public static ArrayList<Token> errores = new ArrayList<>();  
+    public static ArrayList<Symbol> salidaAlv = new ArrayList<>();  
 
     private Symbol symbol(int type) {
       return new Symbol(type, yyline, yycolumn);
     }
-     private Symbol symbol(int type, Object value) {
-       System.out.println(value);
-       System.out.println(type);
+    private Symbol symbol(int type, Object value) {
+      System.out.println(value);
+      System.out.println(type);
       return new Symbol(type, yyline, yycolumn, value);
     }
 
@@ -1372,7 +1373,8 @@ public class Lexer implements java_cup.runtime.Scanner {
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
             zzDoEOF();
-          { return new java_cup.runtime.Symbol(Symb.EOF); }
+          {   return symbol(Symb.EOF);
+ }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
@@ -1454,7 +1456,7 @@ public class Lexer implements java_cup.runtime.Scanner {
             // fall through
           case 158: break;
           case 16:
-            { tokens.add(new Token(yytext(), yyline, yycolumn, "Literal: Numero")); return symbol(Symb.numero, yytext());
+            { tokens.add(new Token(yytext(), yyline, yycolumn, "Literal: Numero"));  symbol(Symb.numero, yytext());
             }
             // fall through
           case 159: break;
@@ -1464,7 +1466,7 @@ public class Lexer implements java_cup.runtime.Scanner {
             // fall through
           case 160: break;
           case 18:
-            { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.punto_coma, yytext());
+            { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  symbol(Symb.punto_coma, yytext());
             }
             // fall through
           case 161: break;
@@ -1508,17 +1510,17 @@ yybegin(filtro);
             // fall through
           case 168: break;
           case 26:
-            { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  return symbol(Symb.techo, yytext());
+            { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  symbol(Symb.techo, yytext());
             }
             // fall through
           case 169: break;
           case 27:
-            { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.O_Parent_L , yytext());
+            { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  symbol(Symb.O_Parent_L , yytext());
             }
             // fall through
           case 170: break;
           case 28:
-            { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador")); return symbol(Symb.C_Parent_L, yytext());
+            { tokens.add(new Token(yytext(), yyline, yycolumn, "Operador"));  symbol(Symb.C_Parent_L, yytext());
             }
             // fall through
           case 171: break;
@@ -1576,7 +1578,7 @@ yybegin(filtro);
             { yybegin(YYINITIAL);
     string.append( yytext() ); 
     tokens.add(new Token(string.toString(), yyline, yycolumn, "Literal hexadecimal/Palabra Reservada")); 
-    return symbol(Symb.numero, yytext());
+     symbol(Symb.numero, yytext());
             }
             // fall through
           case 180: break;
@@ -1653,7 +1655,7 @@ yybegin(filtro);
           case 49:
             { tokens.add(new Token(string.toString(), yyline, yycolumn, "Identificador"));
     yybegin(YYINITIAL);
-    return symbol(Symb.ident, string.toString());  //OJO AQUI
+     symbol(Symb.ident, string.toString());  //OJO AQUI
             }
             // fall through
           case 192: break;
@@ -1662,7 +1664,7 @@ yybegin(filtro);
     string.setLength(0);
     string.append(yytext());
     yybegin(operator);
-    return symbol(Symb.ident, yytext());  //OJO AQUI
+     symbol(Symb.ident, yytext());  //OJO AQUI
             }
             // fall through
           case 193: break;
@@ -1963,7 +1965,7 @@ yybegin(YYINITIAL);
             // fall through
           case 243: break;
           case 101:
-            { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.pragma, yytext());
+            { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));  symbol(Symb.pragma, yytext());
             }
             // fall through
           case 244: break;
@@ -2158,7 +2160,7 @@ yybegin(YYINITIAL);
             // fall through
           case 282: break;
           case 140:
-            { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.contract, yytext());
+            { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));  symbol(Symb.contract, yytext());
             }
             // fall through
           case 283: break;
@@ -2173,7 +2175,7 @@ yybegin(YYINITIAL);
             // fall through
           case 285: break;
           case 143:
-            { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada")); return symbol(Symb.solidity, yytext());
+            { tokens.add(new Token(yytext().trim(), yyline, yycolumn, "Palabra reservada"));  symbol(Symb.solidity, yytext());
             }
             // fall through
           case 286: break;
