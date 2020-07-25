@@ -7,6 +7,10 @@ int a;
 
 	function fi(int x, int y) returns (int a ) { 
 
+		while ( !f || x<2 ) {
+			x= a+b;
+		}  // aceptarlo correctamente
+		
 		if () {  // error no tiene la expresion
 			a= a+b;
 		} 
@@ -14,7 +18,7 @@ int a;
 			a= a+b;
 		}  
 
-		if (true == true) {
+		if (a < a) {
 			a= a+b;
 		} 
 		else {
@@ -32,6 +36,7 @@ int a;
 			a= a+b;
 		} 
 
+		
 		if (true == true) {
 			a= a+b;
 		} 
@@ -39,14 +44,22 @@ int a;
 			a= a+b;
 		}  
         
-        while () {  // error no tiene la expresion
+        while (true) {  // error no tiene la expresion
 			a= a+b;
 		} 
 
-		for (x=0; true == true;) {
+		for (x=0; true == true; a + 3) {
 			a= a+b;
 		} //error pues falta una expresion
 
+		if (true == true) {
+			a= a+b;
+		} 
+		else {
+			a= a+b;
+		}  
+
+		x=(x<2)? 2 + 3 : ; //error
 
 		for (x=1;x<2;x+1){ // no hay error
 			x= a+b; 
@@ -54,15 +67,19 @@ int a;
 		}
 
        
-		while ((!f)||(x<2)) {
-			x= a+b;
-		}  // aceptarlo correctamente
 
+
+		if (true == true) {
+			a= a+b;
+		} 
+		else {
+			a= a+b;
+		}  
 		
-		x=(x<2)? true : ; //error
 		//x=(x<2)?  :b; //error
 		
 		x=(x<2)? a:b;
+		return 2;
 
-
+	}
 } //cierra contrato

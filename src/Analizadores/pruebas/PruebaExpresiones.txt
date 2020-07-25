@@ -14,7 +14,7 @@ contract Contrato{
 
 		x=2;
 		
-		//funcion1(x=3);      //se espera que acepte llamado a funciones
+		funcion1(x=3);      //se espera que acepte llamado a funciones
 
 		//funcion1(3, 3)  ;  //tambien se pueden incluir cosas como estas como parametro y se aceptan
 		//funcion1(3+x, 3=z)  ;  //tambien se pueden incluir cosas como estas como parametro y se aceptan

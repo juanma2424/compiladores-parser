@@ -30,6 +30,7 @@ contract Contrato{
 		a = a * c;
 
 		x=2;
+		return 2;
 	}
 
 } //cierra contrato

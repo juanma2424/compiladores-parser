@@ -47,7 +47,7 @@ terminal pragma, solidity, techo, contract, O_Parent_L, C_Parent_L, epsilon,enum
 terminal String ident, numero,numero_HEX,stringSoli;
 
 //------> declaracion de no terminales
-non terminal String INICIO, NUMERO_P, BODY_CONTRACT, BODY_CONTRACT_P, BODY_CONTRACT_PP, BODY_CONTRACT_PPP, BODY_CONTRACT_PPPP, EN, VAR, STRU, FUNC, EN_IDENT, TIPO, VAR_ARR, VAR_ACCESS, VAR_CONTRACT, VAR_CONTRACT_S, VAR_CONTRACT_C, ASSIGN, VAL_LIT, EXP, OP_ARIT, EXP_ARIT, OP,OP_BOOL,EXP_BOOL,OP_OP_BOOL, OP_ARIT_P, OP_BOOL_P,FUNC_CALL,FUNC_CALL_P,FUNC_CALL_PARAMS,FUNC_CALL_PARAMS_P, IDENT_BODY, IDENT_BODY_P, IDENT_BODY_PP,BODY_LIT_TF, VAR_CONTRACT_P, STRU_WHILE, BODY_SENT, BODY_WHILE, BODY_ASSIGN, BODY_SENT_P, BODY_FUN_CALL, BODY_SENT_M, STRU_FOR, FOR_VAR, STRU_DO_WHILE, STRU_IF, STRU_ELSE, STRU_IF_LINE, IF_LINE_VAR, IF_LINE_VAR_P, STRUCTURE, STRUCTURE_VAR, STRU_IF_ELSE_IN, STRU_ELSE_IN, CUERPO, CUERPO_ASSIGN, FUNC_PARAM, FUNC_MOD, FUNC_RETURNS, CUERPO_M, CUERPO_ASSIGN_P, ASSIGN_NOT_VAR, BODY_SENT_PP, CUERPO_P, EXP_P, EXP_PP, OPERATION_IDENT, OPERATION_IDENT_THIS, OPERATION_IDENT_P, OPERATION_IDENT_PP, OPERATION_IDENT_THIS_P, OPERATION_IDENT_THIS_PP, FUNC_CALL_EXP, FUNC_CALL_PARAMS_EXP, FUNC_CALL_PARAMS_EXP_P, EXP_PPP, EXP_PI, EXP_PII, FUNC_CALL_EXP_P, EXP_PF, SI_NO_PARENT, OPERATION_IDENT_PI, FUNC_CALL_PARAMS_EXP_PI, OP_EXCL, BOOL_GATE, FUNC_CALL_CASE, FUNC_CALL_CASE_P, ARIT_GATE, OP_ARIT_Parent, EXP_P_S, INICIO_P, INICIO_S, CUERPO_MA, CUERPO_ASSIGN_F, CUERPO_ASSIGN_FP;
+non terminal String INICIO, NUMERO_P, BODY_CONTRACT, BODY_CONTRACT_P, BODY_CONTRACT_PP, BODY_CONTRACT_PPP, BODY_CONTRACT_PPPP, EN, VAR, STRU, FUNC, EN_IDENT, TIPO, VAR_ARR, VAR_ACCESS, VAR_CONTRACT, VAR_CONTRACT_S, VAR_CONTRACT_C, ASSIGN, VAL_LIT, EXP, OP_ARIT, EXP_ARIT, OP,OP_BOOL,EXP_BOOL,OP_OP_BOOL, OP_ARIT_P, OP_BOOL_P,FUNC_CALL,FUNC_CALL_P,FUNC_CALL_PARAMS,FUNC_CALL_PARAMS_P, IDENT_BODY, IDENT_BODY_P, IDENT_BODY_PP,BODY_LIT_TF, VAR_CONTRACT_P, STRU_WHILE, BODY_SENT, BODY_WHILE, BODY_ASSIGN, BODY_SENT_P, BODY_FUN_CALL, BODY_SENT_M, STRU_FOR, FOR_VAR, STRU_DO_WHILE, STRU_IF, STRU_ELSE, STRU_IF_LINE, IF_LINE_VAR, IF_LINE_VAR_P, STRUCTURE, STRUCTURE_VAR, STRU_IF_ELSE_IN, STRU_ELSE_IN, CUERPO, CUERPO_ASSIGN, FUNC_PARAM, FUNC_MOD, FUNC_RETURNS, CUERPO_M, CUERPO_ASSIGN_P, ASSIGN_NOT_VAR, BODY_SENT_PP, CUERPO_P, EXP_P, EXP_PP, OPERATION_IDENT, OPERATION_IDENT_THIS, OPERATION_IDENT_P, OPERATION_IDENT_PP, OPERATION_IDENT_THIS_P, OPERATION_IDENT_THIS_PP, FUNC_CALL_EXP, FUNC_CALL_PARAMS_EXP, FUNC_CALL_PARAMS_EXP_P, EXP_PPP, EXP_PI, EXP_PII, FUNC_CALL_EXP_P, EXP_PF, SI_NO_PARENT, OPERATION_IDENT_PI, FUNC_CALL_PARAMS_EXP_PI, OP_EXCL, BOOL_GATE, FUNC_CALL_CASE, FUNC_CALL_CASE_P, ARIT_GATE, OP_ARIT_Parent, EXP_P_S, INICIO_P, INICIO_S, CUERPO_MA, CUERPO_ASSIGN_F, CUERPO_ASSIGN_FP, F_EXP,F_EXP_P, F_EXP_PP, F_BODY_LIT_TF, F_ARIT_GATE, F_OP_ARIT_P, F_EXP_P_S, F_FUNC_CALL_CASE, F_OP_EXCL, F_OP_ARIT, F_EXP_PPP, F_FUNC_CALL_CASE_P, F_OP_ARIT_Parent, F_OP , NEGADO, OP_BOOL_N;
 
 precedence left porcentaje, mas_igual, por_igual, div_igual, menos_igual;
 precedence nonassoc C_Parent_R;
@@ -95,10 +95,10 @@ STRUCTURE_VAR ::= TIPO VAR_ARR VAR_ACCESS ident punto_coma STRUCTURE_VAR | ;
 STRU ::= STRU_WHILE | STRU_FOR | STRU_DO_WHILE | STRU_IF;
 
 /*--------------------------- While ---------------------------------*/
-STRU_WHILE ::= whileSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | whileSoli O_Parent_R error C_Parent_L; // aqui se agrego ----------
+STRU_WHILE ::= whileSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | whileSoli  error C_Parent_L; // aqui se agrego ----------
 
 /*---------------------------- For ----------------------------------*/
-STRU_FOR ::= forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma EXP C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L ; // aqui se agrego ----------
+STRU_FOR ::= forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma F_EXP C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L ; // aqui se agrego ----------
 
 /*------------------------- do-while --------------------------------*/
 STRU_DO_WHILE ::= doSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L whileSoli O_Parent_R OP_BOOL C_Parent_R punto_coma ; // aqui se agrego ----------
@@ -119,7 +119,7 @@ STRU_IF_LINE ::= O_Parent_R OP_BOOL C_Parent_R interrogacion_C EXP punto_punto E
 BODY_SENT_M ::= BODY_SENT BODY_SENT_M | ;
 BODY_SENT ::= ident BODY_SENT_P | thisSoli punto ident igual EXP punto_coma
     | whileSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L 
-    | forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma EXP C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L 
+    | forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma F_EXP C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L 
     | doSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L whileSoli O_Parent_R OP_BOOL C_Parent_R punto_coma 
     | STRU_IF_ELSE_IN
     | returnSoli punto_coma 
@@ -190,7 +190,9 @@ OP ::= mas | menos | div | por | O_Parent_R | C_Parent_R | porcentaje | mas_igua
 OP_EXCL ::= mas | menos | div | por | porcentaje | mas_igual | menos_igual | por_igual | div_igual;
 
 /*-------------------- Operaciones booleanas ------------------------*///NO TIENE PUNTO Y COMA
-OP_BOOL ::= trueSoli OP_BOOL_P | falseSoli OP_BOOL_P | ident OP_BOOL_P;
+OP_BOOL ::= NEGADO OP_BOOL_N;
+NEGADO ::= negacion | ;
+OP_BOOL_N ::= trueSoli OP_BOOL_P | falseSoli OP_BOOL_P | ident OP_BOOL_P | numero OP_BOOL_P;
 OP_BOOL_P ::= OP_OP_BOOL OP_BOOL | ;
 
 OP_OP_BOOL ::= igual_igual | mayor_igual | mayor | menor_igual | menor | diferente | op_or | op_and | negacion;
@@ -199,6 +201,39 @@ OP_OP_BOOL ::= igual_igual | mayor_igual | mayor | menor_igual | menor | diferen
 /*---------------------- Literales de cuerpo ------------------------*///NO TIENE PUNTO Y COMA
 BODY_LIT_TF ::= numero_HEX | stringSoli;
 
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------ Expresiones ------------------------------*/
+/*-------------------- Expresio Principal ---------------------------*/
+F_EXP ::= ident F_EXP_P | thisSoli F_EXP_PP | F_BODY_LIT_TF | F_ARIT_GATE;
+
+//Operacion booleana con true o false de primero
+F_ARIT_GATE ::= numero F_OP_ARIT_P;
+
+//Filto en caso id.id
+F_EXP_P ::= punto ident F_EXP_P_S 
+        | F_EXP_P_S;
+
+//caso funcion | Caso operacion aritmetica | Caso operacion booleana
+F_EXP_P_S ::= O_Parent_R F_FUNC_CALL_CASE | F_OP F_OP_ARIT | ;
+
+//caso funcion | Caso operacion aritmetica | Caso operacion booleana
+F_EXP_PP ::= punto ident F_EXP_PPP;
+F_EXP_PPP ::= O_Parent_R F_FUNC_CALL_CASE | F_OP F_OP_ARIT | ;
+
+/*--------------------- LLamadas a funciones ------------------------*/
+F_FUNC_CALL_CASE ::= ident F_FUNC_CALL_CASE_P | thisSoli punto ident F_FUNC_CALL_CASE_P | C_Parent_R;
+F_FUNC_CALL_CASE_P ::= coma F_FUNC_CALL_CASE | C_Parent_R ;
+
+/*------------------- Operaciones aritmeticas -----------------------*///NO TIENE PUNTO Y COMA
+F_OP_ARIT ::= numero F_OP_ARIT_P | ident F_OP_ARIT_Parent F_OP_ARIT_P | thisSoli punto ident F_OP_ARIT_Parent F_OP_ARIT_P;
+F_OP_ARIT_P ::= F_OP F_OP_ARIT | ;
+
+F_OP_ARIT_Parent ::= punto ident | ;
+F_OP ::= mas | menos | div | por | porcentaje | mas_igual | menos_igual | por_igual | div_igual;
+
+/*---------------------- Literales de cuerpo ------------------------*///NO TIENE PUNTO Y COMA
+F_BODY_LIT_TF ::= numero_HEX | stringSoli;
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*------------------------ TIPOS Datos ------------------------------*/
 TIPO ::= bool | byteSoli | bytes | string | uint | uint_O | uint_DS | uint_TD | uint_SC | uint_CVO | uint_DCS  | intSoli | int_O | int_DS | int_TD | int_SC | int_CVO | int_DCS | address | address_payable | charss | ufixedSoli | B_I | B_II | B_III | B_IV | B_V | B_VI | B_VII | B_IIX | B_IX | B_X | B_XI | B_XII | B_XIII | B_XIV | B_XV | B_XVI | B_XVII | B_XIIX | B_XIX | B_XX | B_XXI | B_XXII | B_XXIII | B_XXIV | B_XXV | B_XXVI | B_XXVII | B_XXIIX | B_XXIX | B_XXX | B_XXXI | B_XXXII;
