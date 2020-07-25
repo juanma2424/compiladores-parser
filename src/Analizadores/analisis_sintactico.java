@@ -1079,9 +1079,10 @@ public class analisis_sintactico extends java_cup.runtime.lr_parser {
             int columna = s.right;
             TError datos = new TError(lexema,fila,columna,"Error Sintactico","Caracter no esperado");
             TablaES.add(datos);
+            System.out.println("------ Recuperacion exitosa ------");
+            System.out.println("\t\tLexema: "+lexema);
         }
-        System.out.println("------ Recuperacion exitosa ------");
-        System.out.println("\t\tLexema: "+lexema);
+
         // System.out.println("!!!!!!! Error Sintactico Recuperado !!!!!!!");
         // System.out.println("\t\tLexema: "+lexema);
         // System.out.println("\t\tFila: "+fila);
@@ -1097,10 +1098,11 @@ public class analisis_sintactico extends java_cup.runtime.lr_parser {
             int columna = s.right;
             TError datos = new TError(lexema,fila,columna,"Error Sintactico","Caracter no esperado");
             TablaES.add(datos);
+            System.out.println("------ Error Sintactico irrecuperable ------");
+            System.out.println("\t\tLexema: "+lexema);
         }
         
-        System.out.println("------ Error Sintactico irrecuperable ------");
-        System.out.println("\t\tLexema: "+lexema);
+
         // System.out.println("\t\tFila: "+fila);
         // System.out.println("\t\tColumna: "+columna);
 

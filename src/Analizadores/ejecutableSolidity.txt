@@ -5,7 +5,7 @@ contract NombreContrato {
     struct IdStruct {
         int public x;
     }
-    function idFuncion ( x , int y ) private returns ( string a ) {
+    function idFuncion (  x , int y ) private returns ( string a ) {
         int public IdVariable ;
         int [] IdVariable ;
         int public x = 2 ;
@@ -18,7 +18,12 @@ contract NombreContrato {
             x = 3; // da error si pongo un int , revisar si se puede poner declaraciones
             continue;
         }
-
+        for ( a = 3 ; b == true ; c ) {
+            x = 2 ;
+            while ( x == false ) {
+                r = 10 ;
+            }
+        }
         Variable = ide + 9 ;
         NameFuncion ( Variable ) ;
         return 3; 
