@@ -9,6 +9,7 @@ contract NombreContrato {
         int public IdVariable ;
         int [] IdVariable ;
         int public x = 2 ;
+        int variable = ( true == true ) ? 2 + 3 : 3 + 4;
         variable = ( true == true ) ? 2 + 3 : 3 + 4;
         if ( true == false ) {
             x = 3;

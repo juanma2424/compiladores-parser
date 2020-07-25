@@ -28,8 +28,7 @@ import java_cup.runtime.*;
       return new Symbol(type, yyline, yycolumn);
     }
      private Symbol symbol(int type, Object value) {
-       System.out.println(value);
-       //System.out.println(type);
+       System.out.println(value + ", " + String.valueOf(type));
       return new Symbol(type, yyline, yycolumn, value);
     }
 
