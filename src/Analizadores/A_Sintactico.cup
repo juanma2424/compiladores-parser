@@ -98,10 +98,10 @@ STRUCTURE_VAR ::= TIPO VAR_ARR VAR_ACCESS ident punto_coma STRUCTURE_VAR | ;
 STRU ::= STRU_WHILE | STRU_FOR | STRU_DO_WHILE | STRU_IF;
 
 /*--------------------------- While ---------------------------------*/
-STRU_WHILE ::= whileSoli O_Parent_R EXP C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | whileSoli error O_Parent_L; // aqui se agrego ----------
+STRU_WHILE ::= whileSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | whileSoli error O_Parent_L; // aqui se agrego ----------
 
 /*---------------------------- For ----------------------------------*/
-STRU_FOR ::= forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma EXP C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | forSoli error O_Parent_L; // aqui se agrego ----------
+STRU_FOR ::= forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma EXP C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | forSoli error C_Parent_L; // aqui se agrego ----------
 
 /*------------------------- do-while --------------------------------*/
 STRU_DO_WHILE ::= doSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L whileSoli O_Parent_R OP_BOOL C_Parent_R punto_coma | doSoli error C_Parent_L; // aqui se agrego ----------
@@ -113,34 +113,36 @@ STRU_IF ::= ifSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_
 STRU_ELSE ::= elseSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | elseSoli error C_Parent_L | ; // Aqui se agrego ---------
 
 /*-------------------------- If line --------------------------------*/
-STRU_IF_LINE ::= O_Parent_R OP_BOOL C_Parent_R interrogacion_C EXP punto_punto EXP punto_coma;
+STRU_IF_LINE ::= O_Parent_R OP_BOOL C_Parent_R interrogacion_C EXP punto_punto EXP punto_coma | O_Parent_R error punto_coma; // en espera de poncho-----------
 
 
 /*------------------------- BODY_SENT -------------------------------*////AGREGAR AQUI
 BODY_SENT_M ::= BODY_SENT BODY_SENT_M | ;
 BODY_SENT ::= ident BODY_SENT_P | thisSoli punto ident igual EXP punto_coma
-    | whileSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L
-    | forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma EXP C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L
-    | doSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L whileSoli O_Parent_R OP_BOOL C_Parent_R punto_coma
+    | whileSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | whileSoli error O_Parent_L
+    | forSoli O_Parent_R FOR_VAR punto_coma OP_BOOL punto_coma EXP C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | forSoli error O_Parent_L
+    | doSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L whileSoli O_Parent_R OP_BOOL C_Parent_R punto_coma | doSoli error C_Parent_L
     | STRU_IF_ELSE_IN
-    | returnSoli punto_coma | breakSoli punto_coma | continueSoli punto_coma;
+    | returnSoli punto_coma | returnSoli error punto_coma
+    | breakSoli punto_coma | breakSoli error punto_coma
+    | continueSoli punto_coma | continueSoli error punto_coma ;
 
 BODY_SENT_P ::= punto ident BODY_SENT_PP| BODY_SENT_PP;
 BODY_SENT_PP ::= BODY_ASSIGN | BODY_FUN_CALL | igual O_Parent_R OP_BOOL C_Parent_R interrogacion_C EXP punto_punto EXP punto_coma;
-STRU_IF_ELSE_IN ::= ifSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L STRU_ELSE_IN;
-STRU_ELSE_IN ::= elseSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | ;
+STRU_IF_ELSE_IN ::= ifSoli O_Parent_R OP_BOOL C_Parent_R O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L STRU_ELSE_IN | ifSoli error O_Parent_L;
+STRU_ELSE_IN ::= elseSoli O_Parent_L BODY_SENT BODY_SENT_M C_Parent_L | elseSoli error C_Parent_L | ;
 
 // BODY_WHILE ::= BODY_SENT BODY_WHILE | epsilon;
-BODY_ASSIGN ::= igual EXP punto_coma;
-BODY_FUN_CALL ::= O_Parent_R FUNC_CALL_PARAMS C_Parent_R punto_coma;
-FOR_VAR ::= ident igual EXP;
+BODY_ASSIGN ::= igual EXP punto_coma | igual error punto_coma;
+BODY_FUN_CALL ::= O_Parent_R FUNC_CALL_PARAMS C_Parent_R punto_coma | O_Parent_R error punto_coma;
+FOR_VAR ::= ident igual EXP | ident error punto_coma;
 // IF_LINE_VAR ::= punto ident | ;
 
 ASSIGN_NOT_VAR ::= EXP punto_coma;
 //-----------------------------------------------------------------------------revisar igual sr----------------------------------------------//
 /*--------------------------- ENUMS ---------------------------------*///TIENE PUNTO Y COMA
 EN ::= enumSoli ident O_Parent_L ident EN_IDENT C_Parent_L | enumSoli error C_Parent_L;  // Aque se agrego ----------------------------------------------
-EN_IDENT ::= coma ident EN_IDENT | ;
+EN_IDENT ::= coma ident EN_IDENT | coma error C_Parent_L | ;
 
 /*------------------------- VARIABLES -------------------------------*///INCOMPLETA
 VAR_CONTRACT ::= TIPO VAR_ARR VAR_ACCESS ident VAR_CONTRACT_P | TIPO error punto_coma;// Aque se agrego ----------------------------------------------
@@ -152,7 +154,7 @@ VAR_CONTRACT_P ::= punto_coma | VAR_CONTRACT_C punto_coma;
 VAR_CONTRACT_C ::= igual EXP;///////////////////////Prueba
 
 /*----------------- 1.C Estructura Variables ------------------------*/
-VAR_ARR ::= O_Parent_C C_Parent_C | ;
+VAR_ARR ::= O_Parent_C C_Parent_C | O_Parent_C error punto_coma | ;
 VAR_ACCESS ::= publicSoli | privateSoli | ;
 
 
@@ -165,7 +167,8 @@ BOOL_GATE ::= trueSoli OP_BOOL_P | falseSoli OP_BOOL_P;
 ARIT_GATE ::= numero OP_ARIT_P;
 
 //Filto en caso id.id
-EXP_P ::= punto ident EXP_P_S| EXP_P_S;
+EXP_P ::= punto ident EXP_P_S | punto error punto_coma
+        | EXP_P_S;
 
 //caso funcion | Caso operacion aritmetica | Caso operacion booleana
 EXP_P_S ::= O_Parent_R FUNC_CALL_CASE | OP_EXCL OP_ARIT | OP_OP_BOOL OP_BOOL | ;

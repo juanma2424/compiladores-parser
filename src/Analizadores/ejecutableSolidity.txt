@@ -9,12 +9,19 @@ contract NombreContrato {
         int public IdVariable ;
         int [] IdVariable ;
         int public x = 2 ;
+        variable = ( true == true ) ? 2 + 3 : 3 + 4;
         if ( true == false ) {
             x = 3;
         }
         while ( true == false ) {
             x = 3; // da error si pongo un int , revisar si se puede poner declaraciones
+            continue;
         }
+
+        for ( a = 2 ; a == true ; a + 3 ) {
+            x = 2;
+        }
+        
         Variable = ide + 9 ;
         NameFuncion ( Variable ) ;
         return 3; 
