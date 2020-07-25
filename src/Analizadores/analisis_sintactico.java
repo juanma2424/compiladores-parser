@@ -1073,35 +1073,38 @@ public class analisis_sintactico extends java_cup.runtime.lr_parser {
     //Metodo al que se llama automaticamente ante algun error sintactico
     public void syntax_error(Symbol s)
     {        
-        String lexema = s.value.toString();
-        int fila = s.left;
-        int columna = s.right;
-        
-        System.out.println("!!!!!!! Error Sintactico Recuperado !!!!!!!");
+        if(s.value != null){
+            String lexema = s.value.toString();
+            int fila = s.left;
+            int columna = s.right;
+            TError datos = new TError(lexema,fila,columna,"Error Sintactico","Caracter no esperado");
+            TablaES.add(datos);
+        }
+        System.out.println("------ Recuperacion exitosa ------");
         System.out.println("\t\tLexema: "+lexema);
-        System.out.println("\t\tFila: "+fila);
-        System.out.println("\t\tColumna: "+columna);
-
-        TError datos = new TError(lexema,fila,columna,"Error Sintactico","Caracter no esperado");
-        TablaES.add(datos);
-       
-        
+        // System.out.println("!!!!!!! Error Sintactico Recuperado !!!!!!!");
+        // System.out.println("\t\tLexema: "+lexema);
+        // System.out.println("\t\tFila: "+fila);
+        // System.out.println("\t\tColumna: "+columna);        
     }
 
     //Metodo al que se llama en el momento en que ya no es posible una recuperacion de errores
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception
     {        
-        String lexema = s.value.toString();
-        int fila = s.left;
-        int columna = s.right;
+        if(s.value != null){
+            String lexema = s.value.toString();
+            int fila = s.left;
+            int columna = s.right;
+            TError datos = new TError(lexema,fila,columna,"Error Sintactico","Caracter no esperado");
+            TablaES.add(datos);
+        }
         
-        System.out.println("!!!!!!! Error Sintactico, Panic Mode !!!!!!! ");
+        System.out.println("------ Error Sintactico irrecuperable ------");
         System.out.println("\t\tLexema: "+lexema);
-        System.out.println("\t\tFila: "+fila);
-        System.out.println("\t\tColumna: "+columna);
+        // System.out.println("\t\tFila: "+fila);
+        // System.out.println("\t\tColumna: "+columna);
 
-        TError datos = new TError(lexema,fila,columna,"Error Sintactico","Caracter no esperado");
-        TablaES.add(datos);
+
      
     }
 
