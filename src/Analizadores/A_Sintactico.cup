@@ -137,6 +137,8 @@ BODY_FUN_CALL ::= O_Parent_R FUNC_CALL_PARAMS C_Parent_R punto_coma ;
 FOR_VAR ::= ident igual EXP ;
 // IF_LINE_VAR ::= punto ident | ;
 
+FUNC_CALL_PARAMS ::= FS_EXP FUNC_CALL_PARAMS_P | ;
+FUNC_CALL_PARAMS_P ::= coma FS_EXP FUNC_CALL_PARAMS | ;
 ASSIGN_NOT_VAR ::= EXP punto_coma;
 //-----------------------------------------------------------------------------revisar igual sr----------------------------------------------//
 /*--------------------------- ENUMS ---------------------------------*///TIENE PUNTO Y COMA
@@ -288,8 +290,6 @@ FS_NEGADO ::= negacion | ;
 //-----------------------------------------------------------------------------------
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-FUNC_CALL_PARAMS ::= EXP FUNC_CALL_PARAMS_P | ;
-FUNC_CALL_PARAMS_P ::= coma EXP FUNC_CALL_PARAMS | ;
 
 /*------------------------ TIPOS Datos ------------------------------*/
 TIPO ::= bool | byteSoli | bytes | string | uint | uint_O | uint_DS | uint_TD | uint_SC | uint_CVO | uint_DCS  | intSoli | int_O | int_DS | int_TD | int_SC | int_CVO | int_DCS | address | address_payable | charss | ufixedSoli | B_I | B_II | B_III | B_IV | B_V | B_VI | B_VII | B_IIX | B_IX | B_X | B_XI | B_XII | B_XIII | B_XIV | B_XV | B_XVI | B_XVII | B_XIIX | B_XIX | B_XX | B_XXI | B_XXII | B_XXIII | B_XXIV | B_XXV | B_XXVI | B_XXVII | B_XXIIX | B_XXIX | B_XXX | B_XXXI | B_XXXII;

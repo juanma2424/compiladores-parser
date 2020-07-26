@@ -1,6 +1,5 @@
 pragma solidity ^0.4.0;
 
-
 contract Contrato{
 
 int a;
@@ -45,13 +44,13 @@ int a;
 			a= a+b;
 		}  
         
-        while (true) {  // error no tiene la expresion
+        while (true) { 
 			a= a+b;
 		} 
 
 		for (x=0; true == true; a + 3) {
 			a= a+b;
-		} //error pues falta una expresion
+		} 
 
 		if (true == true) {
 			a= a+b;
@@ -67,9 +66,6 @@ int a;
 			break;
 		}
 
-       
-
-
 		if (true == true) {
 			a= a+b;
 		} 
@@ -78,9 +74,9 @@ int a;
 		}  
 		
 		x=(x<2)?  :b; //error
-		
 		x=(x<2)? a:b;
 		return 2;
-
 	}
 } //cierra contrato
+
+

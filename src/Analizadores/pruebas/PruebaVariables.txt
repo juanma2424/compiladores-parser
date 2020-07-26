@@ -1,15 +1,11 @@
 pragma solidity ^0.4.0;
 
-
 contract Contrato{
 
 	enum enum1{ id1, id2, id3}
 	enum enum2{ id1, id2 id3} // error de coma
 
-
-
 	int z
-	//int z, t, y, y;
 	string private a;
 	uint y  // error     
 	bytes public ; //error
@@ -20,9 +16,7 @@ contract Contrato{
 	int a = 2;
 	int a =; // error
 
-
 	struct IdStruct {
-		//int z, t, y, y;
 		int y
 	}
 
@@ -31,7 +25,6 @@ contract Contrato{
 	}
 
 	struct { //error
-		//int z, t, y, y;
 		int y;
 	}
 

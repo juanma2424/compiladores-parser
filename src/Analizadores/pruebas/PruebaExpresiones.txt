@@ -6,8 +6,9 @@ contract Contrato{
 
 	function i(int x, int y) 
 	{
-		/////Todas las siguientes expresiones son aceptadas,
 
+		funcionUno(8 < 3);
+		
 		x();
 
 		a = a * c;
@@ -16,16 +17,14 @@ contract Contrato{
 		
 		funcion1(x<3);      //se espera que acepte llamado a funciones
 
-		//funcion1(3, 3)  ;  //tambien se pueden incluir cosas como estas como parametro y se aceptan
 		funcion1(x < 3, 3 - z)  ;  //tambien se pueden incluir cosas como estas como parametro y se aceptan
 
-		//a = 345 +8 * a + ( 5 - 3 ); //se aceptan combinaciones de expresiones
+		a = 345 +8 * a + ( 5 - 3 ); //se aceptan combinaciones de expresiones
 
 		//a = a + 1  //error por el ;
-	
-		//a = a * c + 55 - funcion(8);
-		//a= id.this();
-		//a = a. ;   //error
+		//a = a * c + 55 - funcionUno(8 < 3);
+		a= id.this();
+		a = a. ;   //error
 		a= this.b;
 		return 2;
 
