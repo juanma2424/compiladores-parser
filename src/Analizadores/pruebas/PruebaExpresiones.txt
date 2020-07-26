@@ -8,7 +8,7 @@ contract Contrato{
 	{
 
 		funcionUno(8 < 3);
-		
+
 		x();
 
 		a = a * c;
@@ -22,8 +22,8 @@ contract Contrato{
 		a = 345 +8 * a + ( 5 - 3 ); //se aceptan combinaciones de expresiones
 
 		//a = a + 1  //error por el ;
-		//a = a * c + 55 - funcionUno(8 < 3);
-		a= id.this();
+		a = a * c + 55 - funcionUno(8 < 3);
+		a= this.id();
 		a = a. ;   //error
 		a= this.b;
 		return 2;

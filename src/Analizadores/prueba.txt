@@ -1,11 +1,10 @@
-// ejemplo 1
+pragma solidity ^0.4.0;
 contract contratoA {
     enum clienteTipo { socio , deudor , fiador , obligatorio }
     int saldoMinimo = 100000 ;
     function cobrar ( int saldoMaximo ) { //Revisar varios parametros
         int saldoTemporal = 11 ;
         int deudor = verificarCliente ( acutal , nombre ) ;
-
         return 20 ;
     }
 }
