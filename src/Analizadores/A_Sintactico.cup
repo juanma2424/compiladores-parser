@@ -42,7 +42,7 @@ parser code
     }
 
     public void recuerdoAccess(String pAcces){
-        if(pAcces == ""){
+        if(pAcces == null){
 
         }
         else{

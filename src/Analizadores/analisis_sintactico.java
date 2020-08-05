@@ -1518,7 +1518,7 @@ public class analisis_sintactico extends java_cup.runtime.lr_parser {
     }
 
     public void recuerdoAccess(String pAcces){
-        if(pAcces == ""){
+        if(pAcces == null){
 
         }
         else{
