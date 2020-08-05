@@ -49,6 +49,10 @@ parser code
             pilaSemantica.push(new RS_ACCESS(pAcces));
         }
     }
+
+    public void recuerdoID(String pIdent){
+        pilaSemantica.push(new RS_IDENT(pIdent));
+    }
 :}
 
 //------> Codigo para las acciones gramaticales
@@ -160,7 +164,7 @@ EN ::= enumSoli ident O_Parent_L ident EN_IDENT C_Parent_L | enumSoli error C_Pa
 EN_IDENT ::= coma ident EN_IDENT | ;
 
 /*------------------------- VARIABLES -------------------------------*///INCOMPLETA
-VAR_CONTRACT ::= TIPO:inputTipo {: recuerdoTipo(inputTipo); :} VAR_ARR VAR_ACCESS:inputAccess {: recuerdoAccess(inputAccess); :} ident VAR_CONTRACT_P 
+VAR_CONTRACT ::= TIPO:inputTipo {: recuerdoTipo(inputTipo); :} VAR_ARR VAR_ACCESS:inputAccess {: recuerdoAccess(inputAccess); :} ident:b {: recuerdoID(b); :} VAR_CONTRACT_P 
                 | TIPO error punto_coma ;// Aque se agrego ----------------------------------------------
 
 /*--------------- 1.A VARIABLES sin asignacion ----------------------*/
