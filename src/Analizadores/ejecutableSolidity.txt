@@ -1,31 +1,6 @@
 pragma solidity ^ 0.4.0 ;
 contract NombreContrato {
-    enum NombreEnum { id1, id2, id2 }
-    int public x;
-    struct IdStruct {
-        int public x;
-    }
-    function idFuncion (  x , int y ) private returns ( string a ) {
-        int public IdVariable ;
-        int [] IdVariable ;
-        int public x = 2 ;
-        int variable = ( true == true ) ? 2 + 3 : 3 + 4;
-        variable = ( true == true ) ? 2 + 3 : 3 + 4;
-        if ( true == false ) {
-            x = 3;
-        }
-        while ( true == false ) {
-            x = 3; // da error si pongo un int , revisar si se puede poner declaraciones
-            continue;
-        }
-        for ( a = 3 ; b == true ; c ) {
-            x = 2 ;
-            while ( x == false ) {
-                r = 10 ;
-            }
-        }
-        Variable = ide + 9 ;
-        NameFuncion ( Variable ) ;
-        return 3; 
-    }
+    bool x ;
+    int x ;
+    uint x ;
 }

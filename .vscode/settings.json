@@ -2,5 +2,6 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "libs/projectLib/java-cup-11b-runtime.jar"
-    ]
+    ],
+    "java.dependency.packagePresentation": "flat"
 }

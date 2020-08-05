@@ -5,7 +5,9 @@ import java.util.LinkedList;
 parser code
 {:
     public String resultado="";
-    public static LinkedList<TError> TablaES = new LinkedList<TError>(); 
+    public static LinkedList<TError> TablaES = new LinkedList<TError>();
+    public static LinkedList<Integer> listaParametros = new LinkedList<Integer>();
+    public static LinkedList<RegistroSemantico> pilaSemantica = new LinkedList<RegistroSemantico>();
 
     //Metodo al que se llama automaticamente ante algun error sintactico
     public void syntax_error(Symbol s)
@@ -34,6 +36,10 @@ parser code
             System.out.println("\t\tLexema: "+lexema);
         }
     }
+
+    public void recuerdoTipo(String pTipo){
+        pilaSemantica.push(new RS_Tipo(pTipo));
+    }
 :}
 
 //------> Codigo para las acciones gramaticales
@@ -43,11 +49,10 @@ action code
 
 /*--------------- 2da Area: Declaraciones -----------------------*/
 //------> declaracion de terminales 
-terminal pragma, solidity, techo, contract, O_Parent_L, C_Parent_L, epsilon,enumSoli, punto_coma, coma, bool, byteSoli, bytes, uint, uint_O, uint_DS, uint_TD, uint_SC, uint_CVO, uint_DCS, intSoli, int_O, int_DS, int_TD, int_SC, int_CVO, int_DCS, address, address_payable, O_Parent_C, C_Parent_C, publicSoli, privateSoli, igual, trueSoli, falseSoli, igual_igual , mayor_igual , mayor , menor_igual , menor , diferente , op_or , op_and , negacion, mas , menos , div , por , O_Parent_R , C_Parent_R , porcentaje , mas_igual , menos_igual , por_igual , div_igual, punto, thisSoli, whileSoli, returnSoli, breakSoli, continueSoli, forSoli, doSoli, ifSoli, elseSoli, interrogacion_C, punto_punto, structSoli, functionSoli, payableSoli, internalSoli, returns, charss, string, ufixedSoli, B_I , B_II , B_III , B_IV , B_V , B_VI , B_VII , B_IIX , B_IX , B_X , B_XI , B_XII , B_XIII , B_XIV , B_XV , B_XVI , B_XVII , B_XIIX , B_XIX , B_XX , B_XXI , B_XXII , B_XXIII , B_XXIV , B_XXV , B_XXVI , B_XXVII , B_XXIIX , B_XXIX , B_XXX , B_XXXI , B_XXXII;
-terminal String ident, numero,numero_HEX,stringSoli;
+terminal String pragma, solidity, techo, contract, O_Parent_L, C_Parent_L,enumSoli, punto_coma, coma, bool, byteSoli, bytes, uint, uint_O, uint_DS, uint_TD, uint_SC, uint_CVO, uint_DCS, intSoli, int_O, int_DS, int_TD, int_SC, int_CVO, int_DCS, address, address_payable, O_Parent_C, C_Parent_C, publicSoli, privateSoli, igual, trueSoli, falseSoli, igual_igual , mayor_igual , mayor , menor_igual , menor , diferente , op_or , op_and , negacion, mas , menos , div , por , O_Parent_R , C_Parent_R , porcentaje , mas_igual , menos_igual , por_igual , div_igual, punto, thisSoli, whileSoli, returnSoli, breakSoli, continueSoli, forSoli, doSoli, ifSoli, elseSoli, interrogacion_C, punto_punto, structSoli, functionSoli, payableSoli, internalSoli, returns, charss, string, ufixedSoli, ident, numero,numero_HEX,stringSoli, B_I , B_II , B_III , B_IV , B_V , B_VI , B_VII , B_IIX , B_IX , B_X , B_XI , B_XII , B_XIII , B_XIV , B_XV , B_XVI , B_XVII , B_XIIX , B_XIX , B_XX , B_XXI , B_XXII , B_XXIII , B_XXIV , B_XXV , B_XXVI , B_XXVII , B_XXIIX , B_XXIX , B_XXX , B_XXXI , B_XXXII;
 
 //------> declaracion de no terminales
-non terminal String INICIO, NUMERO_P, BODY_CONTRACT, BODY_CONTRACT_P, BODY_CONTRACT_PP, BODY_CONTRACT_PPP, BODY_CONTRACT_PPPP, EN, VAR, STRU, FUNC, EN_IDENT, TIPO, VAR_ARR, VAR_ACCESS, VAR_CONTRACT, VAR_CONTRACT_S, VAR_CONTRACT_C, ASSIGN, VAL_LIT, EXP, OP_ARIT, EXP_ARIT, OP,OP_BOOL,EXP_BOOL,OP_OP_BOOL, OP_ARIT_P, OP_BOOL_P,FUNC_CALL,FUNC_CALL_P,FUNC_CALL_PARAMS,FUNC_CALL_PARAMS_P, IDENT_BODY, IDENT_BODY_P, IDENT_BODY_PP,BODY_LIT_TF, VAR_CONTRACT_P, STRU_WHILE, BODY_SENT, BODY_WHILE, BODY_ASSIGN, BODY_SENT_P, BODY_FUN_CALL, BODY_SENT_M, STRU_FOR, FOR_VAR, STRU_DO_WHILE, STRU_IF, STRU_ELSE, STRU_IF_LINE, IF_LINE_VAR, IF_LINE_VAR_P, STRUCTURE, STRUCTURE_VAR, STRU_IF_ELSE_IN, STRU_ELSE_IN, CUERPO, CUERPO_ASSIGN, FUNC_PARAM, FUNC_MOD, FUNC_RETURNS, CUERPO_M, CUERPO_ASSIGN_P, ASSIGN_NOT_VAR, BODY_SENT_PP, CUERPO_P, EXP_P, EXP_PP, OPERATION_IDENT, OPERATION_IDENT_THIS, OPERATION_IDENT_P, OPERATION_IDENT_PP, OPERATION_IDENT_THIS_P, OPERATION_IDENT_THIS_PP, FUNC_CALL_EXP, FUNC_CALL_PARAMS_EXP, FUNC_CALL_PARAMS_EXP_P, EXP_PPP, EXP_PI, EXP_PII, FUNC_CALL_EXP_P, EXP_PF, SI_NO_PARENT, OPERATION_IDENT_PI, FUNC_CALL_PARAMS_EXP_PI, OP_EXCL, BOOL_GATE, FUNC_CALL_CASE, FUNC_CALL_CASE_P, ARIT_GATE, OP_ARIT_Parent, EXP_P_S, INICIO_P, INICIO_S, CUERPO_MA, CUERPO_ASSIGN_F, CUERPO_ASSIGN_FP, F_EXP,F_EXP_P, F_EXP_PP, F_BODY_LIT_TF, F_ARIT_GATE, F_OP_ARIT_P, F_EXP_P_S, F_FUNC_CALL_CASE, F_OP_EXCL, F_OP_ARIT, F_EXP_PPP, F_FUNC_CALL_CASE_P, F_OP_ARIT_Parent, F_OP , NEGADO, OP_BOOL_N, FS_EXP,FS_EXP_P, FS_EXP_PP, FS_BODY_LIT_TF, FS_ARIT_GATE, FS_OP_ARIT_P, FS_EXP_P_S, FS_FUNC_CALL_CASE, FS_OP_EXCL, FS_OP_ARIT, FS_EXP_PPP, FS_FUNC_CALL_CASE_P, FS_OP_ARIT_Parent, FS_OP , FS_NEGADO, FS_OP_BOOL_N, FS_BOOL_GATE, FS_OP_BOOL_P, FS_OP_OP_BOOL, FS_OP_BOOL , PARENT_S, OP_ARIT_A, FS_OP_BOOL_F, THREE, PCLASS;
+non terminal String INICIO, BODY_CONTRACT, BODY_CONTRACT_P, BODY_CONTRACT_PP, BODY_CONTRACT_PPP, EN, STRU, FUNC, EN_IDENT, TIPO, VAR_ARR, VAR_ACCESS, VAR_CONTRACT, VAR_CONTRACT_C, EXP, OP_ARIT, OP,OP_BOOL,OP_OP_BOOL, OP_ARIT_P, OP_BOOL_P,FUNC_CALL_PARAMS,FUNC_CALL_PARAMS_P,BODY_LIT_TF, VAR_CONTRACT_P, STRU_WHILE, BODY_SENT, BODY_ASSIGN, BODY_SENT_P, BODY_FUN_CALL, BODY_SENT_M, STRU_FOR, FOR_VAR, STRU_DO_WHILE, STRU_IF, STRU_ELSE, STRU_IF_LINE, STRUCTURE, STRUCTURE_VAR, STRU_IF_ELSE_IN, STRU_ELSE_IN, CUERPO, FUNC_PARAM, FUNC_MOD, FUNC_RETURNS, CUERPO_M, ASSIGN_NOT_VAR, BODY_SENT_PP, CUERPO_P, EXP_P, EXP_PP, EXP_PPP, OP_EXCL, BOOL_GATE, FUNC_CALL_CASE, FUNC_CALL_CASE_P, ARIT_GATE, EXP_P_S, INICIO_S, CUERPO_MA, CUERPO_ASSIGN_F, CUERPO_ASSIGN_FP, F_EXP,F_EXP_P, F_EXP_PP, F_BODY_LIT_TF, F_ARIT_GATE, F_OP_ARIT_P, F_EXP_P_S, F_FUNC_CALL_CASE, F_OP_ARIT, F_EXP_PPP, F_FUNC_CALL_CASE_P, F_OP_ARIT_Parent, F_OP , NEGADO, OP_BOOL_N, FS_EXP,FS_EXP_P, FS_EXP_PP, FS_BODY_LIT_TF, FS_ARIT_GATE, FS_EXP_P_S, FS_EXP_PPP, FS_OP, FS_BOOL_GATE, FS_OP_BOOL_P, FS_OP_OP_BOOL, FS_OP_BOOL , PARENT_S, OP_ARIT_A, FS_OP_BOOL_F, PCLASS;
 
 precedence left porcentaje, mas_igual, por_igual, div_igual, menos_igual;
 precedence nonassoc C_Parent_R;
@@ -146,7 +151,8 @@ EN ::= enumSoli ident O_Parent_L ident EN_IDENT C_Parent_L | enumSoli error C_Pa
 EN_IDENT ::= coma ident EN_IDENT | ;
 
 /*------------------------- VARIABLES -------------------------------*///INCOMPLETA
-VAR_CONTRACT ::= TIPO VAR_ARR VAR_ACCESS ident VAR_CONTRACT_P | TIPO error punto_coma ;// Aque se agrego ----------------------------------------------
+VAR_CONTRACT ::= TIPO:inputTipo {: recuerdoTipo(inputTipo); :} VAR_ARR VAR_ACCESS ident VAR_CONTRACT_P 
+                | TIPO error punto_coma ;// Aque se agrego ----------------------------------------------
 
 /*--------------- 1.A VARIABLES sin asignacion ----------------------*/
 VAR_CONTRACT_P ::= punto_coma | VAR_CONTRACT_C punto_coma;
@@ -163,8 +169,12 @@ VAR_ACCESS ::= publicSoli | privateSoli | ;
 EXP ::= ident EXP_P | thisSoli EXP_PP | BODY_LIT_TF | ARIT_GATE | BOOL_GATE;
 
 //Operacion booleana con true o false de primero
-BOOL_GATE ::= trueSoli OP_BOOL_P | falseSoli OP_BOOL_P;
-ARIT_GATE ::= numero OP_ARIT_P | numero;
+BOOL_GATE ::= trueSoli OP_BOOL_P 
+            | falseSoli OP_BOOL_P;
+
+ARIT_GATE ::= numero:num {:listaParametros.add(Integer.parseInt(num));:} OP_ARIT_P 
+            | numero:num {:listaParametros.add(Integer.parseInt(num));:};
+
 
 //Filto en caso id.id
 EXP_P ::= punto ident EXP_P_S 
@@ -183,16 +193,22 @@ FUNC_CALL_CASE ::= FS_EXP FUNC_CALL_CASE_P | C_Parent_R;
 FUNC_CALL_CASE_P ::= coma FUNC_CALL_CASE | C_Parent_R ;
 
 /*------------------- Operaciones aritmeticas -----------------------*///NO TIENE PUNTO Y COMA
-OP_ARIT ::= numero OP_ARIT_P | ident OP_ARIT_A | thisSoli punto ident OP_ARIT_A | numero;
-OP_ARIT_A ::= O_Parent_R FUNC_CALL_CASE | OP_ARIT_P | ;
-OP_ARIT_P ::= OP PARENT_S OP_ARIT | C_Parent_R;
-OP_ARIT_Parent ::= punto ident | ;
+OP_ARIT ::= numero:num {:listaParametros.add(Integer.parseInt(num));:} OP_ARIT_P 
+            | ident OP_ARIT_A 
+            | thisSoli punto ident OP_ARIT_A 
+            | numero:num {:listaParametros.add(Integer.parseInt(num));:};
+OP_ARIT_A ::= O_Parent_R FUNC_CALL_CASE 
+            | OP_ARIT_P 
+            | ;
+OP_ARIT_P ::= OP PARENT_S OP_ARIT 
+            | C_Parent_R;
+// OP_ARIT_Parent ::= punto ident | ;
 
 PARENT_S ::= C_Parent_R | O_Parent_R | ;
 
 OP ::= mas | menos | div | por |  porcentaje | mas_igual | menos_igual | por_igual | div_igual;
 OP_EXCL ::= mas | menos | div | por | porcentaje | mas_igual | menos_igual | por_igual | div_igual;
-THREE ::= ident | thisSoli punto ident | numero | ;
+// THREE ::= ident | thisSoli punto ident | numero | ;
 
 /*-------------------- Operaciones booleanas ------------------------*///NO TIENE PUNTO Y COMA
 OP_BOOL ::= NEGADO OP_BOOL_N;
@@ -264,8 +280,8 @@ FS_EXP_PP ::= punto ident FS_EXP_PPP;
 FS_EXP_PPP ::= O_Parent_R FS_OP_BOOL | FS_OP FS_OP_BOOL | FS_OP_OP_BOOL FS_OP_BOOL | ;
 
 /*--------------------- LLamadas a funciones ------------------------*/
-FS_FUNC_CALL_CASE ::= ident FS_FUNC_CALL_CASE_P | thisSoli punto ident FS_FUNC_CALL_CASE_P | C_Parent_R;
-FS_FUNC_CALL_CASE_P ::= coma FS_FUNC_CALL_CASE | C_Parent_R ;
+// FS_FUNC_CALL_CASE ::= ident FS_FUNC_CALL_CASE_P | thisSoli punto ident FS_FUNC_CALL_CASE_P | C_Parent_R;
+// FS_FUNC_CALL_CASE_P ::= coma FS_FUNC_CALL_CASE | C_Parent_R ;
 
 
 /*---------------------- Literales de cuerpo ------------------------*///NO TIENE PUNTO Y COMA
@@ -281,7 +297,7 @@ FS_OP_OP_BOOL ::= igual_igual | mayor_igual | mayor | menor_igual | menor | dife
 
 PCLASS ::= punto ident | ;
 
-FS_NEGADO ::= negacion | ;
+// FS_NEGADO ::= negacion | ;
 //-----------------------------------------------------------------------------------
 /* Fin de codigo para agregar expresiones booleanas a llamada a funiones*/
 //-----------------------------------------------------------------------------------
@@ -289,4 +305,57 @@ FS_NEGADO ::= negacion | ;
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*------------------------ TIPOS Datos ------------------------------*/
-TIPO ::= bool | byteSoli | bytes | string | uint | uint_O | uint_DS | uint_TD | uint_SC | uint_CVO | uint_DCS  | intSoli | int_O | int_DS | int_TD | int_SC | int_CVO | int_DCS | address | address_payable | charss | ufixedSoli | B_I | B_II | B_III | B_IV | B_V | B_VI | B_VII | B_IIX | B_IX | B_X | B_XI | B_XII | B_XIII | B_XIV | B_XV | B_XVI | B_XVII | B_XIIX | B_XIX | B_XX | B_XXI | B_XXII | B_XXIII | B_XXIV | B_XXV | B_XXVI | B_XXVII | B_XXIIX | B_XXIX | B_XXX | B_XXXI | B_XXXII;
+TIPO ::= bool:b {:RESULT = b;:} 
+        | byteSoli:b {:RESULT = b;:}
+        | bytes:b {:RESULT = b;:}
+        | string:b {:RESULT = b;:}
+        | uint:b {:RESULT = b;:}
+        | uint_O:b {:RESULT = b;:}
+        | uint_DS:b {:RESULT = b;:}
+        | uint_TD:b {:RESULT = b;:}
+        | uint_SC:b {:RESULT = b;:}
+        | uint_CVO:b {:RESULT = b;:}
+        | uint_DCS:b {:RESULT = b;:}
+        | intSoli:b {:RESULT = b;:}
+        | int_O:b {:RESULT = b;:}
+        | int_DS:b {:RESULT = b;:}
+        | int_TD:b {:RESULT = b;:}
+        | int_SC:b {:RESULT = b;:}
+        | int_CVO:b {:RESULT = b;:}
+        | int_DCS:b {:RESULT = b;:}
+        | address:b {:RESULT = b;:}
+        | address_payable:b {:RESULT = b;:}
+        | charss:b {:RESULT = b;:}
+        | ufixedSoli:b {:RESULT = b;:}
+        | B_I:b {:RESULT = b;:}
+        | B_II:b {:RESULT = b;:}
+        | B_III:b {:RESULT = b;:}
+        | B_IV:b {:RESULT = b;:}
+        | B_V:b {:RESULT = b;:}
+        | B_VI:b {:RESULT = b;:}
+        | B_VII:b {:RESULT = b;:}
+        | B_IIX:b {:RESULT = b;:}
+        | B_IX:b {:RESULT = b;:}
+        | B_X:b {:RESULT = b;:}
+        | B_XI:b {:RESULT = b;:}
+        | B_XII:b {:RESULT = b;:}
+        | B_XIII:b {:RESULT = b;:}
+        | B_XIV:b {:RESULT = b;:}
+        | B_XV:b {:RESULT = b;:}
+        | B_XVI:b {:RESULT = b;:}
+        | B_XVII:b {:RESULT = b;:}
+        | B_XIIX:b {:RESULT = b;:}
+        | B_XIX:b {:RESULT = b;:}
+        | B_XX:b {:RESULT = b;:}
+        | B_XXI:b {:RESULT = b;:}
+        | B_XXII:b {:RESULT = b;:}
+        | B_XXIII:b {:RESULT = b;:}
+        | B_XXIV:b {:RESULT = b;:}
+        | B_XXV:b {:RESULT = b;:}
+        | B_XXVI:b {:RESULT = b;:}
+        | B_XXVII:b {:RESULT = b;:}
+        | B_XXIIX:b {:RESULT = b;:}
+        | B_XXIX:b {:RESULT = b;:}
+        | B_XXX:b {:RESULT = b;:}
+        | B_XXXI:b {:RESULT = b;:}
+        | B_XXXII:b {:RESULT = b;:};

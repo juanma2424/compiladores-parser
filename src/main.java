@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class main {
     public static void accessToken(Lexer lexico) {
@@ -29,7 +30,7 @@ public class main {
     public static void main(String[] args) {
         try {
             File file = new File(
-                    "/media/bryan/Disco 1/Documentos/Ingeniería en computación/Semestre V/Compiladores/Proyectos/Proyecto 2/Codigo/compiladores-parser/src/Analizadores/pruebas/PruebaExpresiones.txt");
+                    "C:\\Users\\alfon\\Documents\\compiladores-parser\\src\\Analizadores\\ejecutableSolidity.txt");
             Lexer lexico = new Lexer(new BufferedReader(new FileReader(file)));
             analisis_sintactico sintactico = new analisis_sintactico(lexico);
             System.out.println("--------------------------- Parseando... ---------------------------");
@@ -38,6 +39,8 @@ public class main {
             accessToken(lexico);
             System.out.println("--------------------------- Errores sintacticos ---------------------------");
             accessErrors(sintactico);
+            LinkedList<RegistroSemantico> pilaSemantica = sintactico.pilaSemantica;
+            System.out.println("F");
             // System.out.println(sintactico.resultado);
         } catch (Exception e) {
             System.out.println(e);
