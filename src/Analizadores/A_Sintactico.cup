@@ -40,6 +40,15 @@ parser code
     public void recuerdoTipo(String pTipo){
         pilaSemantica.push(new RS_Tipo(pTipo));
     }
+
+    public void recuerdoAccess(String pAcces){
+        if(pAcces == ""){
+
+        }
+        else{
+            pilaSemantica.push(new RS_ACCESS(pAcces));
+        }
+    }
 :}
 
 //------> Codigo para las acciones gramaticales
@@ -151,7 +160,7 @@ EN ::= enumSoli ident O_Parent_L ident EN_IDENT C_Parent_L | enumSoli error C_Pa
 EN_IDENT ::= coma ident EN_IDENT | ;
 
 /*------------------------- VARIABLES -------------------------------*///INCOMPLETA
-VAR_CONTRACT ::= TIPO:inputTipo {: recuerdoTipo(inputTipo); :} VAR_ARR VAR_ACCESS ident VAR_CONTRACT_P 
+VAR_CONTRACT ::= TIPO:inputTipo {: recuerdoTipo(inputTipo); :} VAR_ARR VAR_ACCESS:inputAccess {: recuerdoAccess(inputAccess); :} ident VAR_CONTRACT_P 
                 | TIPO error punto_coma ;// Aque se agrego ----------------------------------------------
 
 /*--------------- 1.A VARIABLES sin asignacion ----------------------*/
@@ -162,7 +171,9 @@ VAR_CONTRACT_C ::= igual EXP;///////////////////////Prueba
 
 /*----------------- 1.C Estructura Variables ------------------------*/
 VAR_ARR ::= O_Parent_C C_Parent_C | ;
-VAR_ACCESS ::= publicSoli | privateSoli | ;
+VAR_ACCESS ::= publicSoli:b {: RESULT = b; :} 
+            | privateSoli:b {: RESULT = b; :}
+            | ;
 
 /*------------------------ Expresiones ------------------------------*/
 /*-------------------- Expresio Principal ---------------------------*/

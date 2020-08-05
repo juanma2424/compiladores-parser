@@ -1,6 +1,6 @@
 pragma solidity ^ 0.4.0 ;
 contract NombreContrato {
-    bool x ;
+    bool public x ;
     int x ;
     uint x ;
 }
