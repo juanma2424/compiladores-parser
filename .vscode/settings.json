@@ -1,7 +1,12 @@
 {
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "libs/projectLib/java-cup-11b-runtime.jar"
-    ],
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "libs/projectLib/java-cup-11b-runtime.jar"
+        ],
+        "exclude": [
+            "libs/compilerLib/java-cup-11b.jar"
+        ]
+    },
     "java.dependency.packagePresentation": "flat"
 }
